@@ -8,11 +8,11 @@ interface Props {
   flipped: boolean;
   heading: {
     heading_text: string;
-    color: string;
+    text_color: string;
   };
   text: {
-    markdown_content: string;
-    color: string;
+    text_content: string;
+    text_color: string;
   };
   image: {
     image_path: string;
@@ -58,11 +58,11 @@ const imageSrc =
           src={imageSrc}
         />
         <div class="left-right__text order-1 md:order-2">
-          <h2 class="text-4xl" style={`color: ${block.heading.color};`}>
+          <h2 class="text-4xl" style={`color: ${block.heading.text_color};`}>
             {block.heading.heading_text}
           </h2>
-          <div class="mb-4" style={`color: ${block.text.color};`}>
-            <Markdown content={block.text.markdown_content} />
+          <div class="mb-4" style={`color: ${block.text.text_color};`}>
+            <Markdown content={block.text.text_content} />
           </div>
           {block.button && <Button {...block.button} />}
         </div>
@@ -70,11 +70,11 @@ const imageSrc =
     ) : (
       <div class="left-right__wrapper">
         <div class="left-right__text">
-          <h2 class="text-4xl" style={`color: ${block.heading.color};`}>
+          <h2 class="text-4xl" style={`color: ${block.heading.text_color};`}>
             {block.heading.heading_text}
           </h2>
-          <div class="mb-4" style={`color: ${block.text.color};`}>
-            <Markdown content={block.text.markdown_content} />
+          <div class="mb-4" style={`color: ${block.text.text_color};`}>
+            <Markdown content={block.text.text_content} />
           </div>
           {block.button && <Button {...block.button} />}
         </div>

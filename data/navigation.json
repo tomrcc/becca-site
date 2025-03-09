@@ -2,16 +2,32 @@
   "header": {
     "logo": "/images/logos/logo-wordmark-blue.png",
     "logo_url": "/",
-    "background_color": "#ffffff",
-    "color": "#393939",
+    "background_color": "transparent",
+    "color": "#ffffff",
     "links": [
       {
-        "link": "/blog/",
-        "text": "Blog"
+        "text": "Home",
+        "link": "/"
       },
       {
-        "link": "/feed.xml",
-        "text": "RSS Feed"
+        "text": "About Becca",
+        "link": "/#about"
+      },
+      {
+        "text": "Offerings",
+        "link": "/#offerings"
+      },
+      {
+        "text": "Online Studio",
+        "link": "/#online-studio"
+      },
+      {
+        "text": "Events",
+        "link": "/#events"
+      },
+      {
+        "text": "Contact",
+        "link": "/#contact"
       }
     ]
   },
@@ -23,12 +39,28 @@
     "color": "#ffffff",
     "links": [
       {
-        "link": "/blog/",
-        "text": "Blog"
+        "text": "Home",
+        "link": "/"
       },
       {
-        "link": "/feed.xml",
-        "text": "RSS Feed"
+        "text": "About Becca",
+        "link": "/#about"
+      },
+      {
+        "text": "Offerings",
+        "link": "/#offerings"
+      },
+      {
+        "text": "Online Studio",
+        "link": "/#online-studio"
+      },
+      {
+        "text": "Events",
+        "link": "/#events"
+      },
+      {
+        "text": "Contact",
+        "link": "/#contact"
       }
     ],
     "social": [

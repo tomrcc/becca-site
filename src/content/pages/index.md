@@ -19,11 +19,11 @@ content_blocks:
       heading_text: Astro Bookshop Starter
       heading_gradient_color: "#a0a2ff"
     subheading:
-      markdown_content: >-
+      text_content: >-
         A starting point for **developers looking to build a website with Astro,
         using Bookshop components in CloudCannon**. Create your own copy, and
         start creating your own components to use in the CloudCannon CMS.
-      color: "#393939"
+      text_color: "#393939"
     image:
       image_path: /src/assets/images/featured-image-5.jpg
       alt_text: An image
@@ -47,34 +47,8 @@ content_blocks:
       heading_text: Keep what you need. Delete the rest.
       color: "#393939"
     text:
-      markdown_content: >-
-        To help save you time, some features are set up in this template, like:
-
-        -
-        [Bookshop](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/)
-
-        - Blog with pagination, tags and
-        [snippets](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx)
-
-        - [Image
-        optimization](https://docs.astro.build/en/guides/images/#image--astroassets)
-
-        - SEO Controls
-
-        - Responsive header and footer
-
-        - [Font Awesome Icons](https://fontawesome.com/search?o=r&m=free)
-
-        - Schemas for adding new pages
-
-        - Editable color pallete
-
-        - Markdown styles
-
-        - CloudCannon configuration
-
-        - CSS variables
-      color: "#393939"
+      text_content:
+      text_color: "#393939"
     image:
       image_path: /src/assets/images/undraw-hello.svg
       alt_text: An image

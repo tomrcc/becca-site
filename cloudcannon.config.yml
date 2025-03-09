@@ -106,7 +106,7 @@ _editables:
     snippet: true
 
 _inputs:
-  markdown_content:
+  text_content:
     type: markdown
     options:
       blockquote: true
