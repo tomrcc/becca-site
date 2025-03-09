@@ -13,7 +13,7 @@ const seoSchema = z
   .optional();
 
 const pageSchema = z.object({
-  title: z.string(),
+  title: z.string().nullable(),
   content_blocks: z.array(z.any()),
   seo: seoSchema,
 });

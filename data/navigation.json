@@ -1,9 +1,10 @@
 {
   "header": {
-    "logo": "/images/logos/logo-wordmark-blue.png",
+    "logo": "/images/logo.png",
     "logo_url": "/",
     "background_color": "transparent",
     "color": "#ffffff",
+    "height": 6,
     "links": [
       {
         "text": "Home",

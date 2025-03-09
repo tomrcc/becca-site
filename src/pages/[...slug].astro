@@ -1,7 +1,6 @@
 ---
 import PageLayout from "../layouts/Page.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
-
 export interface Props {
   page: CollectionEntry<"pages">;
 }
@@ -25,5 +24,7 @@ const { page } = Astro.props;
   :root {
     --pageContainer: 1280px;
     --pagePadding: 2rem;
+    --headerLogoHeight: 5rem;
+    --headerPaddingBlock: 1rem;
   }
 </style>

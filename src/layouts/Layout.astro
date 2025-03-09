@@ -58,7 +58,7 @@ const canonicalURL = new URL(seo?.canonical_url ?? Astro.url.pathname, baseUrl);
       canonical={canonicalURL.toString()}
       openGraph={{
         basic: {
-          title: Astro.props.title,
+          title: title,
           url: baseUrl?.toString(),
           type: `${seo?.open_graph_type || "website"}`,
           image: `${baseUrl}${image}`,
@@ -84,11 +84,5 @@ const canonicalURL = new URL(seo?.canonical_url ?? Astro.url.pathname, baseUrl);
       <slot />
     </main>
     <Footer />
-    <style is:global>
-      :root {
-        --pageContainer: 1280px;
-        --pagePadding: 2rem;
-      }
-    </style>
   </body>
 </html>

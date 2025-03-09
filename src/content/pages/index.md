@@ -11,10 +11,10 @@ seo:
 content_blocks:
   - _bookshop_name: hero
     heading:
-      heading_text: Astro Bookshop Starter
-      text__color: "#a0a2ff"
+      heading_text: Welcome to Hihi Yoga, a place to create a practice that works for you.
+      text_color: "#ffffff"
     image:
-      image_path: /src/assets/images/featured-image-5.jpg
-      alt_text: An image
+      image_path: /src/assets/images/becca-long-grass.jpeg
+      alt_text: Becca amongst long grass, balancing on her side on one arm and a leg, with the other arm raised towards the sky.
     background_color: "#ffffff"
 ---

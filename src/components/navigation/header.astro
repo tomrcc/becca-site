@@ -1,5 +1,5 @@
 ---
-import { header } from '../../../data/navigation.json';
+import { header } from "../../../data/navigation.json";
 ---
 
 <header
@@ -55,12 +55,17 @@ import { header } from '../../../data/navigation.json';
 <style>
   .header__container {
     max-width: var(--pageContainer);
-    margin: 0 auto;
     padding-inline: var(--pagePadding);
+    margin: 0 auto;
+    position: relative;
+    z-index: 99;
   }
-
   .header li {
     list-style-type: none;
+  }
+  .header__logo-image {
+    height: var(--headerLogoHeight);
+    width: auto;
   }
 
   .header__nav {
@@ -68,10 +73,6 @@ import { header } from '../../../data/navigation.json';
     justify-content: space-between;
     align-items: center;
     padding-block: 1rem;
-  }
-
-  .header__logo-image {
-    width: 200px;
   }
 
   .header__nav-links {
@@ -129,24 +130,4 @@ import { header } from '../../../data/navigation.json';
       display: none;
     }
   }
-  /* .hamburger__inner,
-  .hamburger__inner::before,
-  .hamburger__inner::after {
-    display: block;
-    width: 2rem;
-    height: 0.25rem;
-    background-color: #034ad8;
-  }
-  .hamburger__inner::before,
-  .hamburger__inner::after {
-    content: '';
-    display: block;
-    position: relative;
-  }
-  .hamburger__inner::before {
-    top: -0.625rem;
-  }
-  .hamburger__inner::after {
-    top: 0.4rem;
-  } */
 </style>
