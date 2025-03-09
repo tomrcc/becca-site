@@ -13,18 +13,13 @@ spec:
 
 # Defines the structure of this component, as well as the default values
 blueprint:
-  background_color: '#ffffff'
   heading:
     heading_text: Astro Bookshop Starter
-    heading_gradient_color: '#a0a2ff'
-  subheading:
-    text_content: >-
-      A starting point for developers looking to build a website with Astro, using Bookshop components in CloudCannon. Create your own copy, and start creating your own components to use in the CloudCannon CMS.
-    color: '#393939'
+    text_color: '#a0a2ff'
   image:
     image_path: /src/assets/images/featured-image-5.jpg
     alt_text: An image
-  buttons: [bookshop:structure:buttons]
+  background_color: '#ffffff'
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
@@ -41,22 +36,6 @@ _inputs:
         subtext:
           - key: heading_gradient_color
           - 'Update heading gradient color and text content.'
-  subheading:
-    options:
-      preview:
-        icon: 'short_text'
-        text:
-          - Subheading
-        subtext:
-          - 'Update subheading content and color.'
-  heading_gradient_color:
-    type: select
-    options:
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
   image:
     options:
       preview:
