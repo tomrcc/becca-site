@@ -2,24 +2,21 @@
 spec:
   structures:
     - content_blocks
-  label: Hero
-  description: Outline color
+  label: Hero - Background Image
+  description: 
   icon: 'cottage'
   tags:
-    - Image
-    - Animation
     - Text
-    - Buttons
+    - Background image
 
 # Defines the structure of this component, as well as the default values
 blueprint:
   heading:
     heading_text: 
     text_color: '#a0a2ff'
-  image:
+  background_image:
     image_path: 
     alt_text: 
-  background_color: '#ffffff'
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
@@ -36,7 +33,7 @@ _inputs:
         subtext:
           - key: heading_gradient_color
           - 'Update heading gradient color and text content.'
-  image:
+  background_image:
     options:
       preview:
         icon: 'image'
@@ -48,3 +45,4 @@ _inputs:
           - 'Update image'
         image:
           - key: image_path
+    
