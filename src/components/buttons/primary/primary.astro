@@ -1,5 +1,5 @@
 ---
-import Icon from '../../utility/icon';
+import Icon from "../../utility/icon";
 interface Props {
   button_text: string;
   button_icon: string;
@@ -13,14 +13,16 @@ const block = Astro.props;
 const hover_brightness = block.hover_brightness;
 ---
 
-<button style={`background-color: ${block.background_color};`} class="button">
+<button
+  style={`background-color: ${block.background_color}; border: 1px solid ${block.background_color};`}
+  class="button">
   <a style={`color: ${block.text_color}`} href={block.button_link}>
     {
-    block.button_icon ? (
-    <span class="button__icon">
-      <Icon icon={block.button_icon} />
-    </span>
-    ) : null
+      block.button_icon ? (
+        <span class="button__icon">
+          <Icon icon={block.button_icon} />
+        </span>
+      ) : null
     }
     {block.button_text}
   </a>
@@ -30,7 +32,7 @@ const hover_brightness = block.hover_brightness;
   .button {
     cursor: pointer;
     border: none;
-    border-radius: 8px;
+    border-radius: 2px;
     padding: 0;
   }
   .button a {
@@ -38,7 +40,6 @@ const hover_brightness = block.hover_brightness;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 8px;
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
   }

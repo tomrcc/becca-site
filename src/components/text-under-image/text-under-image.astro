@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
+  background_color: string;
   text: {
     text_content: string;
     text_color: string;
@@ -25,7 +26,7 @@ interface Props {
   ];
 }
 
-const { text, image, buttons } = Astro.props;
+const { text, image, buttons, background_color } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
   { eager: true }
@@ -36,7 +37,9 @@ const allButtons = import.meta.glob("/src/components/buttons/**/*.astro", {
 const imageSrc = images[image.image_path]?.default ?? image.image_path;
 ---
 
-<section class="text-under-image">
+<section
+  class="text-under-image"
+  style=`background-color: ${background_color};`>
   <div class="text-under-image-container">
     {imageSrc ? <Image alt={image.alt_text} src={imageSrc} /> : ""}
     <div class="markdown-text" style={`color: ${text.text_color};`}>
@@ -57,4 +60,36 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
   </div>
 </section>
 
-<style></style>
+<style>
+  .text-under-image-container {
+    max-width: var(--pageContainer);
+    padding-inline: var(--pagePadding);
+    padding-block: 95px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .text-under-image-container .markdown-text {
+    font-size: 1.25rem;
+    line-height: 140%;
+    text-align: center;
+    max-width: 816px;
+  }
+  .text-under-image-container img {
+    max-width: 19rem;
+  }
+  .text-under-image-container .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  @media screen and (min-width: 512px) {
+    .text-under-image-container {
+      padding-block: 190px;
+    }
+  }
+</style>
