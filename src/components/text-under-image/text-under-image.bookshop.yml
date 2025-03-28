@@ -1,0 +1,50 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Text under image
+  description: 
+  icon: 'cottage'
+  tags:
+    - Image
+    - Text
+    - Buttons
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  image:
+    image_path: 
+    alt_text: 
+  text:
+    text_content: 
+    text_color: '#a0a2ff'
+  buttons: [bookshop:structure:buttons]
+    
+# Overrides any fields in the blueprint when viewing this component in the component browser
+preview:
+
+# Any extra CloudCannon inputs configuration to apply to the blueprint
+_inputs:
+  text:
+    options:
+      preview:
+        icon: 'description'
+        text:
+          - key: text_content
+          - Text
+        subtext:
+          - key: text_color
+          - 'Update heading gradient color and text content.'
+  image:
+    options:
+      preview:
+        icon: 'image'
+        text:
+          - key: alt_text
+          - 'Image'
+        subtext:
+          - key: image_path
+          - 'Update image'
+        image:
+          - key: image_path
+    
