@@ -36,4 +36,20 @@ content_blocks:
         background_color: "#B77763"
         hover_brightness: 0.85
         text_color: "#ffffff"
+  - _bookshop_name: text-bg-image
+    background_image:
+      image_path: /src/assets/images/becca-cross-legged.jpeg
+      alt_text: Becca sitting cross legged on some grass.
+    text:
+      text_content: >-
+        Connect with your teacher, Becca Huxley, to gain personalised guidance and support for your unique practice. Join the Hihi Yoga online studio to become a part of a supportive like-minded community, follow along for tips and inspiration to help you stay accountable, wherever you are in the world. 
+      text_color: '#F9EEDE'
+    buttons: 
+      - _bookshop_name: buttons/primary
+        button_text: Online Studio
+        button_icon: ''
+        button_link: '#offerings'
+        background_color: "#B77763"
+        hover_brightness: 0.85
+        text_color: "#ffffff"
 ---

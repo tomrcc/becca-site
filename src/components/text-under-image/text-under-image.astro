@@ -31,10 +31,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
   { eager: true }
 );
+const imageSrc = images[image.image_path]?.default ?? image.image_path;
 const allButtons = import.meta.glob("/src/components/buttons/**/*.astro", {
   eager: true,
 });
-const imageSrc = images[image.image_path]?.default ?? image.image_path;
 ---
 
 <section
