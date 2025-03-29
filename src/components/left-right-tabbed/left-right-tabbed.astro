@@ -98,6 +98,12 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
   spicy-sections h3 {
     margin-right: 40px;
   }
+  spicy-sections h3[expanded] {
+    color: var(--tab_text_color) !important;
+  }
+  [affordance="collapse"] h3::before {
+    display: none;
+  }
 
   .left-right-tabbed-content img {
     width: 40%;
