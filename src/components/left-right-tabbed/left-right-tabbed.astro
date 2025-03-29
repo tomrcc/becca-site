@@ -1,0 +1,113 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Markdown from "../utility/markdown.astro";
+
+interface Props {
+  background_color: string;
+  tab_heading_inactive_color: string;
+  tab_text_color: string;
+  flipped: boolean;
+  heading: {
+    heading_text: string;
+    text_color: string;
+  };
+  tabs: [
+    {
+      tab_heading: string;
+      text_content: string;
+    },
+  ];
+  image: {
+    image_path: string;
+    alt_text: string;
+  };
+}
+
+const {
+  image,
+  background_color,
+  tab_heading_inactive_color,
+  tab_text_color,
+  heading,
+  tabs,
+  flipped,
+} = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,svg}",
+  { eager: true }
+);
+
+const imageSrc = images[image.image_path]?.default ?? image.image_path;
+---
+
+<div class="left-right-tabbed" style={`background-color: ${background_color};`}>
+  {
+    flipped ? (
+      <div class="left-right-tabbed-wrapper">
+        <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+        <div class="left-right-tabbed-content">
+          <Image
+            alt={image.alt_text}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+          />
+
+          <spicy-sections class="spicy-sections">
+            {tabs?.map((tab) => {
+              return (
+                <>
+                  <h3 style={`color: ${tab_heading_inactive_color};`}>
+                    {tab.tab_heading}
+                  </h3>
+                  <div>
+                    <Markdown content={tab.text_content} />
+                  </div>
+                </>
+              );
+            })}
+          </spicy-sections>
+        </div>
+      </div>
+    ) : (
+      "TODO: Put another one here flipped"
+    )
+  }
+</div>
+
+<style define:vars={{ tab_text_color }}>
+  .left-right-tabbed-wrapper {
+    max-width: var(--pageContainer);
+    padding-inline: var(--pagePadding);
+    margin: 0 auto;
+    padding-block: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+  .left-right-tabbed-content {
+    display: flex;
+    gap: 17px;
+  }
+  spicy-sections {
+    --const-mq-affordances: [screen and (max-width: 40em)] collapse | [screen and
+      (min-width: 60em)] tab-bar;
+    display: flex;
+    flex-direction: column;
+  }
+  spicy-sections h3 {
+    margin-right: 40px;
+  }
+
+  .left-right-tabbed-content img {
+    width: 40%;
+    max-width: 816px;
+    aspect-ratio: 1 / 1.22;
+    border-radius: 40px;
+  }
+  @media only screen and (min-width: 512px) {
+    .left-right-tabbed-wrapper {
+      padding-block: 140px;
+    }
+  }
+</style>

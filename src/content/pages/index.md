@@ -52,4 +52,25 @@ content_blocks:
         background_color: "#B77763"
         hover_brightness: 0.85
         text_color: "#ffffff"
+  - _bookshop_name: left-right-tabbed
+    background_color: '#ffffff'
+    tab_heading_inactive_color: '#272D2D99'
+    tab_text_color: '#272D2D'
+    heading:
+      heading_text: Meet Becca
+      text_color: '#272D2D'
+    tabs:
+      - tab_heading: About
+        text_content: >-
+          Originally from north Wales, I now live and teach Yoga in Ōtepoti/Dunedin, New Zealand. I have been spending time on my mat since 2012. As a student I found online Yoga, it helped me navigate the stress of study and gave me a space to explore movement that I hadn’t had before, I was soon hooked. In 2015 after completing a BSc in Psychology I began to pursue my passion for travel, always bringing my mat along with me.
+
+          
+          From 2021 I started practicing Ashtanga more regularly and devoted my personal practice to the lineage. Subsequently making two trips to Mysore India, the birthplace of Ashtanga in 2023 and 2024 to practice with renowned teacher Vijay Kumar. I hope to return back to India each year to learn from my teacher Vijay Kumar and continue to share what I learn of the rich history, culture and origins of Yoga with my students. 
+      - tab_heading: What I teach
+        text_content: >-
+          I teach Ashtanga, Vinyasa, Yin and Prāṇāyāma. My offerings focus on creating strong and stable foundations to grow a safe and sustainable practice. I give students the guidance and encouragement to create a mind-body connection, ensuring everyone feels confident and empowered to explore their limits safely and in a fun way. 
+    image:
+      image_path: /src/assets/images/becca-hello-there.jpeg
+      alt_text: An image
+    flipped: true
 ---
