@@ -84,37 +84,67 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
     padding-block: 70px;
     display: flex;
     flex-direction: column;
+    position: relative;
+  }
+  .left-right-tabbed-wrapper h2 {
+    font-size: 1.5rem;
+    position: absolute;
+    top: calc(70px + 16px);
+    left: calc(var(--pagePadding) + 16px);
+    color: white !important;
   }
   .left-right-tabbed-content {
     display: flex;
-    gap: 17px;
-  }
-  spicy-sections {
-    --const-mq-affordances: [screen and (max-width: 40em)] collapse | [screen and
-      (min-width: 60em)] tab-bar;
-    display: flex;
     flex-direction: column;
-  }
-  spicy-sections h3 {
-    margin-right: 40px;
-  }
-  spicy-sections h3[expanded] {
-    color: var(--tab_text_color) !important;
-  }
-  [affordance="collapse"] h3::before {
-    display: none;
+    gap: 17px;
   }
 
   .left-right-tabbed-content img {
-    width: 40%;
-    max-width: 816px;
-    height: max-content;
-    aspect-ratio: 1 / 1.22;
+    width: 100%;
+    height: auto;
     border-radius: 40px;
   }
-  @media only screen and (min-width: 512px) {
+  spicy-sections {
+    --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
+    width: 100%;
+  }
+  spicy-sections h3 {
+    margin-right: 8px;
+    margin-bottom: 27px;
+    font-size: 1.25;
+    overflow: wrap;
+  }
+  spicy-sections::part(tab-list) {
+    overflow-x: scroll;
+  }
+  spicy-sections h3[aria-selected="true"] {
+    color: var(--tab_text_color) !important;
+  }
+  @media only screen and (min-width: 720px) {
     .left-right-tabbed-wrapper {
       padding-block: 140px;
+    }
+    .left-right-tabbed-wrapper h2 {
+      font-size: 2rem;
+      position: static;
+      color: inherit !important;
+    }
+    .left-right-tabbed-content {
+      flex-direction: row;
+    }
+    .left-right-tabbed-content img {
+      width: 40%;
+      max-width: 816px;
+      height: max-content;
+      aspect-ratio: 1 / 1.22;
+    }
+    spicy-sections {
+      flex-direction: column;
+    }
+    spicy-sections h3 {
+      font-size: 1.5;
+      margin-right: 40px;
+      margin-bottom: 54px;
     }
   }
 </style>

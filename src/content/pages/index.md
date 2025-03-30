@@ -53,7 +53,7 @@ content_blocks:
         hover_brightness: 0.85
         text_color: "#ffffff"
   - _bookshop_name: left-right-tabbed
-    background_color: '#ffffff'
+    background_color: '#F9EEDE'
     tab_heading_inactive_color: '#272D2D99'
     tab_text_color: '#272D2D'
     heading:
@@ -69,6 +69,17 @@ content_blocks:
       - tab_heading: What I teach
         text_content: >-
           I teach Ashtanga, Vinyasa, Yin and Prāṇāyāma. My offerings focus on creating strong and stable foundations to grow a safe and sustainable practice. I give students the guidance and encouragement to create a mind-body connection, ensuring everyone feels confident and empowered to explore their limits safely and in a fun way. 
+      - tab_heading: Yoga Certificates
+        text_content: >-
+          Yoga certifications
+
+          - 200 hr YTT - Yoga Koh 2021
+
+          - 50hr YTT  - Rainbow Kids Yoga, 2022
+
+          - 20hr Prāṇāyāma - BNS Iyengar, 2023
+
+          - 1 month Back bending and flexibility course, Vinay Kumar, 2024
     image:
       image_path: /src/assets/images/becca-hello-there.jpeg
       alt_text: An image
