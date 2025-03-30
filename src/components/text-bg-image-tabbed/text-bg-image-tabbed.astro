@@ -26,29 +26,31 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
-<spicy-sections class="spicy-sections">
-  {
-    tabs?.map((tab) => {
-      const imageSrc =
-        images[tab.background_image.image_path]?.default ??
-        tab.background_image.image_path;
-      return (
-        <>
-          <h3>{tab.text.text_heading}</h3>
-          <div class="">
-            <Image
-              alt={tab.background_image.alt_text}
-              widths={[320, 500, 640]}
-              sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-              src={imageSrc}
-            />
-            <Markdown content={tab.text.text_content} />
-          </div>
-        </>
-      );
-    })
-  }
-</spicy-sections>
+<div class="text-bg-image-tabbed">
+  <spicy-sections class="spicy-sections">
+    {
+      tabs?.map((tab) => {
+        const imageSrc =
+          images[tab.background_image.image_path]?.default ??
+          tab.background_image.image_path;
+        return (
+          <>
+            <h3>{tab.text.text_heading}</h3>
+            <div class="">
+              <Image
+                alt={tab.background_image.alt_text}
+                widths={[320, 500, 640]}
+                sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+                src={imageSrc}
+              />
+              <Markdown content={tab.text.text_content} />
+            </div>
+          </>
+        );
+      })
+    }
+  </spicy-sections>
+</div>
 
 <style>
   spicy-sections {
@@ -79,7 +81,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 </style>
 
 <style is:global>
-  spicy-sections .markdown-text p {
+  .text-bg-image-tabbed spicy-sections .markdown-text p {
     position: relative !important;
     color: white !important;
   }

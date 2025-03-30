@@ -104,20 +104,20 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
     height: auto;
     border-radius: 40px;
   }
-  spicy-sections {
+  .left-right-tabbed spicy-sections {
     --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
     width: 100%;
   }
-  spicy-sections h3 {
+  .left-right-tabbed spicy-sections h3 {
     margin-right: 8px;
     margin-bottom: 27px;
     font-size: 1.25;
     overflow: wrap;
   }
-  spicy-sections::part(tab-list) {
+  .left-right-tabbed spicy-sections::part(tab-list) {
     overflow-x: scroll;
   }
-  spicy-sections h3[aria-selected="true"] {
+  .left-right-tabbed spicy-sections h3[aria-selected="true"] {
     color: var(--tab_text_color) !important;
   }
   @media only screen and (min-width: 720px) {
