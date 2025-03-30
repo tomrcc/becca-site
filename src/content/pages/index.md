@@ -112,6 +112,9 @@ content_blocks:
         text:
           text_heading: Vinyasa
           text_content: >-
+            #### Vinyasa
+
+
             Vinyasa flow is a creative practice where postures are linked together with the breath in a flowing sequence. The beauty of Vinyasa is the variety, there isn’t a set sequence, so the style, pace and intensity will all vary depending on the class.
       - background_image:
           image_path: /src/assets/images/becca-breathe.jpeg
@@ -119,6 +122,9 @@ content_blocks:
         text:
           text_heading: Prāṇāyāma
           text_content: >-
+            #### Prāṇāyāma
+
+
             Prāṇāyāma is an ancient breathing technique originating from India. It involves controlling your breath in different styles and lengths to connect with the body and mind.
       - background_image:
           image_path: /src/assets/images/becca-child-pose.jpeg
@@ -126,5 +132,8 @@ content_blocks:
         text:
           text_heading: Yin
           text_content: >-
+            #### Yin
+
+            
             Yin-Yin Yoga is a slow paced meditative practice that works deeply into the connected tissue and fascia with passive, longer-held postures. Practiced mainly on the ground, holding postures from 2-5 minutes using props to support the body. 
 ---

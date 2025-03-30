@@ -82,9 +82,6 @@ const textColor = tab_styles.text_color;
     /* min-height: 80vh; */
   }
   .text-bg-image-tabbed-tab-heading {
-    max-width: var(--pageContainer);
-    margin-inline: var(--pagePadding);
-    padding: 20px;
   }
 
   .text-bg-image-tabbed-content {
@@ -93,10 +90,10 @@ const textColor = tab_styles.text_color;
 
   spicy-sections {
     --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
-    width: 100%;
+    width: 100% !important;
     min-height: 80vh;
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     padding-block: 48px;
@@ -114,13 +111,17 @@ const textColor = tab_styles.text_color;
     z-index: 9;
     background-color: var(--headingBackgroundColor);
     color: var(--headingTextColor) !important;
+    padding: 20px;
   }
   spicy-sections::part(tab-bar) {
-    display: flex;
+    width: 100%;
+    max-width: var(--pageContainer);
+    margin: 0 auto;
   }
   spicy-sections::part(tab-list) {
     display: flex;
-    gap: 1rem;
+    padding-inline: var(--pagePadding);
+    gap: 48px;
   }
   spicy-sections h3[aria-selected="true"] {
     background-color: var(--headingActiveBackgroundColor);
@@ -138,12 +139,14 @@ const textColor = tab_styles.text_color;
     position: relative !important;
     color: var(--textColor);
     background-color: var(--textBackgroundColor);
+    max-width: 540px;
     margin-bottom: 0;
     padding-block: 16px;
     padding-inline: 37px;
   }
   .text-bg-image-tabbed spicy-sections .markdown-text > *:first-child {
     padding-top: 47px;
+    margin-top: 96px;
   }
   .text-bg-image-tabbed spicy-sections .markdown-text > *:last-child {
     padding-bottom: 29px;
