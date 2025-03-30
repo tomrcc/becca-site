@@ -84,4 +84,22 @@ content_blocks:
       image_path: /src/assets/images/becca-hello-there.jpeg
       alt_text: An image
     flipped: true
+  - _bookshop_name: text-bg-image-tabbed
+    tabs:
+      - background_image:
+          image_path: /src/assets/images/becca-hello-there.jpeg
+          alt_text: A bg image
+        text:
+          text_heading: Ashtanga
+          text_content: >-
+            Ashtanga Yoga is a dynamic practice centred on self-practice and one-on-one instruction, using the Tristhana Method. This method integrates breath, postures, and Drishti (a single point of focus) to cultivate concentration. Students progress through set series at their own pace, guided by their breath, with individualised support from the teacher.
+          text_color: '#a0a2ff'
+      - background_image:
+          image_path: /src/assets/images/becca-cross-legged.jpeg
+          alt_text: A bg image
+        text:
+          text_heading: Vinyasa
+          text_content: >-
+            Vinyasa flow is a creative practice where postures are linked together with the breath in a flowing sequence. The beauty of Vinyasa is the variety, there isn’t a set sequence, so the style, pace and intensity will all vary depending on the class.
+          text_color: '#a0a2ff'
 ---

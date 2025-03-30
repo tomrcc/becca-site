@@ -1,0 +1,86 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Markdown from "../utility/markdown.astro";
+
+interface Props {
+  tabs: [
+    {
+      text: {
+        text_heading: string;
+        text_content: string;
+        text_color: string;
+      };
+      background_image: {
+        image_path: string;
+        alt_text: string;
+      };
+    },
+  ];
+}
+
+const { tabs } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif}",
+  { eager: true }
+);
+---
+
+<spicy-sections class="spicy-sections">
+  {
+    tabs?.map((tab) => {
+      const imageSrc =
+        images[tab.background_image.image_path]?.default ??
+        tab.background_image.image_path;
+      return (
+        <>
+          <h3>{tab.text.text_heading}</h3>
+          <div class="">
+            <Image
+              alt={tab.background_image.alt_text}
+              widths={[320, 500, 640]}
+              sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+              src={imageSrc}
+            />
+            <Markdown content={tab.text.text_content} />
+          </div>
+        </>
+      );
+    })
+  }
+</spicy-sections>
+
+<style>
+  spicy-sections {
+    --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
+    width: 100%;
+    position: relative;
+  }
+  spicy-sections img {
+    position: absolute;
+    top: -1rem;
+  }
+
+  spicy-sections h3 {
+    margin-right: 8px;
+    margin-bottom: 27px;
+    font-size: 1.25;
+    overflow: wrap;
+    position: relative;
+    z-index: 9;
+    color: white;
+  }
+  spicy-sections::part(content-panel) {
+    background-color: gray;
+  }
+  spicy-sections h3[aria-selected="true"] {
+    color: red !important;
+  }
+</style>
+
+<style is:global>
+  spicy-sections .markdown-text p {
+    position: relative !important;
+    color: white !important;
+  }
+</style>
