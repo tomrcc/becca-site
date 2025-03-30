@@ -4,6 +4,14 @@ import { Image } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
+  tab_styles: {
+    heading_background_color: string;
+    heading_text_color: string;
+    heading_active_background_color: string;
+    heading_active_text_color: string;
+    text_background_color: string;
+    text_color: string;
+  };
   tabs: [
     {
       text: {
@@ -19,11 +27,17 @@ interface Props {
   ];
 }
 
-const { tabs } = Astro.props;
+const { tabs, tab_styles } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
   { eager: true }
 );
+const headingBackgroundColor = tab_styles.heading_background_color;
+const headingTextColor = tab_styles.heading_text_color;
+const headingActiveBackgroundColor = tab_styles.heading_active_background_color;
+const headingActiveTextColor = tab_styles.heading_active_text_color;
+const textBackgroundColor = tab_styles.text_background_color;
+const textColor = tab_styles.text_color;
 ---
 
 <div class="text-bg-image-tabbed">
@@ -35,10 +49,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
           tab.background_image.image_path;
         return (
           <>
-            <h3 class="text-bg-image-tabbed-container">
+            <h3 class="text-bg-image-tabbed-tab-heading">
               {tab.text.text_heading}
             </h3>
-            <div>
+            <div class="text-bg-image-tabbed-content">
               <Image
                 alt={tab.background_image.alt_text}
                 widths={[320, 500, 640]}
@@ -54,19 +68,43 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   </spicy-sections>
 </div>
 
-<style>
-  .text-bg-image-tabbed-container {
-    max-width: var(--pageContainer);
-    margin: 0 auto;
-    padding-inline: var(--pagePadding);
+<style
+  define:vars={{
+    headingBackgroundColor,
+    headingTextColor,
+    headingActiveBackgroundColor,
+    headingActiveTextColor,
+    textBackgroundColor,
+    textColor,
+  }}
+>
+  .text-bg-image-tabbed {
+    /* min-height: 80vh; */
   }
+  .text-bg-image-tabbed-tab-heading {
+    max-width: var(--pageContainer);
+    margin-inline: var(--pagePadding);
+    padding: 20px;
+  }
+
+  .text-bg-image-tabbed-content {
+    align-self: flex-end;
+  }
+
   spicy-sections {
     --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
     width: 100%;
+    min-height: 80vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: 48px;
+    margin-bottom: -1rem;
   }
   spicy-sections img {
     position: absolute;
+    height: 100%;
     top: -1rem;
   }
   spicy-sections h3 {
@@ -74,7 +112,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     overflow: wrap;
     position: relative;
     z-index: 9;
-    color: white;
+    background-color: var(--headingBackgroundColor);
+    color: var(--headingTextColor) !important;
   }
   spicy-sections::part(tab-bar) {
     display: flex;
@@ -84,18 +123,29 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
     gap: 1rem;
   }
   spicy-sections h3[aria-selected="true"] {
-    color: red !important;
+    background-color: var(--headingActiveBackgroundColor);
+    color: var(--headingActiveTextColor) !important;
   }
 </style>
 
-<style is:global>
+<style is:global define:vars={{ textBackgroundColor, textColor }}>
   .text-bg-image-tabbed spicy-sections .markdown-text {
     max-width: var(--pageContainer) !important;
     margin: 0 auto;
     padding-inline: var(--pagePadding);
   }
-  .text-bg-image-tabbed spicy-sections .markdown-text p {
+  .text-bg-image-tabbed spicy-sections .markdown-text > * {
     position: relative !important;
-    color: white !important;
+    color: var(--textColor);
+    background-color: var(--textBackgroundColor);
+    margin-bottom: 0;
+    padding-block: 16px;
+    padding-inline: 37px;
+  }
+  .text-bg-image-tabbed spicy-sections .markdown-text > *:first-child {
+    padding-top: 47px;
+  }
+  .text-bg-image-tabbed spicy-sections .markdown-text > *:last-child {
+    padding-bottom: 29px;
   }
 </style>

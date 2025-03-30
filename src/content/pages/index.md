@@ -85,21 +85,46 @@ content_blocks:
       alt_text: An image
     flipped: true
   - _bookshop_name: text-bg-image-tabbed
+    tab_styles:
+      heading_background_color: '#F9EEDE'
+      heading_text_color: '#58825F'
+      heading_active_background_color: '#58825F'
+      heading_active_text_color: '#F9EEDE'
+      text_background_color: '#F9EEDE'
+      text_color: '#272D2D'
     tabs:
       - background_image:
-          image_path: /src/assets/images/becca-hello-there.jpeg
+          image_path: /src/assets/images/becca-triangle.jpeg
           alt_text: A bg image
         text:
           text_heading: Ashtanga
           text_content: >-
+            #### Ashtanga
+
+
             Ashtanga Yoga is a dynamic practice centred on self-practice and one-on-one instruction, using the Tristhana Method. This method integrates breath, postures, and Drishti (a single point of focus) to cultivate concentration. Students progress through set series at their own pace, guided by their breath, with individualised support from the teacher.
-          text_color: '#a0a2ff'
+
+
+            Ashtanga Yoga is a dynamic practice centred on self-practice and one-on-one instruction, using the Tristhana Method. This method integrates breath, postures, and Drishti (a single point of focus) to cultivate concentration. Students progress through set series at their own pace, guided by their breath, with individualised support from the teacher.
       - background_image:
-          image_path: /src/assets/images/becca-cross-legged.jpeg
+          image_path: /src/assets/images/becca-side-pose.jpeg
           alt_text: A bg image
         text:
           text_heading: Vinyasa
           text_content: >-
             Vinyasa flow is a creative practice where postures are linked together with the breath in a flowing sequence. The beauty of Vinyasa is the variety, there isn’t a set sequence, so the style, pace and intensity will all vary depending on the class.
-          text_color: '#a0a2ff'
+      - background_image:
+          image_path: /src/assets/images/becca-breathe.jpeg
+          alt_text: A bg image
+        text:
+          text_heading: Prāṇāyāma
+          text_content: >-
+            Prāṇāyāma is an ancient breathing technique originating from India. It involves controlling your breath in different styles and lengths to connect with the body and mind.
+      - background_image:
+          image_path: /src/assets/images/becca-child-pose.jpeg
+          alt_text: A bg image
+        text:
+          text_heading: Yin
+          text_content: >-
+            Yin-Yin Yoga is a slow paced meditative practice that works deeply into the connected tissue and fascia with passive, longer-held postures. Practiced mainly on the ground, holding postures from 2-5 minutes using props to support the body. 
 ---
