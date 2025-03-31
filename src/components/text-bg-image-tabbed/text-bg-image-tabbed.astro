@@ -4,7 +4,11 @@ import { Image } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
-  tab_styles: {
+  mobile_styles: {
+    background_color: string;
+    text_color: string;
+  };
+  desktop_tab_styles: {
     heading_background_color: string;
     heading_text_color: string;
     heading_active_background_color: string;
@@ -19,7 +23,7 @@ interface Props {
         text_content: string;
         text_color: string;
       };
-      background_image: {
+      image: {
         image_path: string;
         alt_text: string;
       };
@@ -27,128 +31,204 @@ interface Props {
   ];
 }
 
-const { tabs, tab_styles } = Astro.props;
+const { tabs, desktop_tab_styles, mobile_styles } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
   { eager: true }
 );
-const headingBackgroundColor = tab_styles.heading_background_color;
-const headingTextColor = tab_styles.heading_text_color;
-const headingActiveBackgroundColor = tab_styles.heading_active_background_color;
-const headingActiveTextColor = tab_styles.heading_active_text_color;
-const textBackgroundColor = tab_styles.text_background_color;
-const textColor = tab_styles.text_color;
+const bgTabbedHeadingBackgroundColor =
+  desktop_tab_styles.heading_background_color;
+const bgTabbedHeadingTextColor = desktop_tab_styles.heading_text_color;
+const bgTabbedHeadingActiveBackgroundColor =
+  desktop_tab_styles.heading_active_background_color;
+const bgTabbedHeadingActiveTextColor =
+  desktop_tab_styles.heading_active_text_color;
+const bgTabbedDesktopTextBackgroundColor =
+  desktop_tab_styles.text_background_color;
+const bgTabbedDesktopTextColor = desktop_tab_styles.text_color;
+const mobileTextColor = mobile_styles.text_color;
+const bgTabbedAmountOfTabs = tabs?.length ?? 0;
 ---
 
-<div class="text-bg-image-tabbed">
-  <spicy-sections class="spicy-sections">
+<section>
+  <div
+    class="text-bg-image-tabbed-mobile"
+    style={`background-color: ${mobile_styles.background_color};`}>
     {
       tabs?.map((tab) => {
         const imageSrc =
-          images[tab.background_image.image_path]?.default ??
-          tab.background_image.image_path;
+          images[tab.image.image_path]?.default ?? tab.image.image_path;
         return (
-          <>
-            <h3 class="text-bg-image-tabbed-tab-heading">
-              {tab.text.text_heading}
-            </h3>
-            <div class="text-bg-image-tabbed-content">
-              <Image
-                alt={tab.background_image.alt_text}
-                widths={[320, 500, 640]}
-                sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-                src={imageSrc}
-              />
-              <Markdown content={tab.text.text_content} />
-            </div>
-          </>
+          <div class="text-bg-image-tabbed-tab">
+            <Image
+              alt={tab.image.alt_text}
+              widths={[320, 500, 640]}
+              sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+              src={imageSrc}
+            />
+            <Markdown content={tab.text.text_content} />
+          </div>
         );
       })
     }
-  </spicy-sections>
-</div>
+  </div>
+  <div class="text-bg-image-tabbed-desktop">
+    <spicy-sections class="spicy-sections">
+      {
+        tabs?.map((tab) => {
+          const imageSrc =
+            images[tab.image.image_path]?.default ?? tab.image.image_path;
+          return (
+            <>
+              <h3 class="text-bg-image-tabbed-tab-heading">
+                {tab.text.text_heading}
+              </h3>
+              <div class="text-bg-image-tabbed-content">
+                <Image
+                  alt={tab.image.alt_text}
+                  widths={[320, 500, 640]}
+                  sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+                  src={imageSrc}
+                />
+                <Markdown content={tab.text.text_content} />
+              </div>
+            </>
+          );
+        })
+      }
+    </spicy-sections>
+  </div>
+</section>
 
 <style
   define:vars={{
-    headingBackgroundColor,
-    headingTextColor,
-    headingActiveBackgroundColor,
-    headingActiveTextColor,
-    textBackgroundColor,
-    textColor,
+    bgTabbedHeadingBackgroundColor,
+    bgTabbedHeadingTextColor,
+    bgTabbedHeadingActiveBackgroundColor,
+    bgTabbedHeadingActiveTextColor,
+    bgTabbedDesktopTextBackgroundColor,
+    bgTabbedDesktopTextColor,
+    bgTabbedAmountOfTabs,
   }}
 >
-  .text-bg-image-tabbed {
-    /* min-height: 80vh; */
-  }
-  .text-bg-image-tabbed-tab-heading {
-  }
-
-  .text-bg-image-tabbed-content {
-    align-self: flex-end;
-  }
-
-  spicy-sections {
-    --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
-    width: 100% !important;
-    min-height: 80vh;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-block: 48px;
-    margin-bottom: -1rem;
-  }
-  spicy-sections img {
-    position: absolute;
-    height: 100%;
-    top: -1rem;
-  }
-  spicy-sections h3 {
-    font-size: 1.25;
-    overflow: wrap;
-    position: relative;
-    z-index: 9;
-    background-color: var(--headingBackgroundColor);
-    color: var(--headingTextColor) !important;
-    padding: 20px;
-  }
-  spicy-sections::part(tab-bar) {
-    width: 100%;
-    max-width: var(--pageContainer);
-    margin: 0 auto;
-  }
-  spicy-sections::part(tab-list) {
-    display: flex;
+  /* Mobile */
+  .text-bg-image-tabbed-mobile {
+    display: grid;
+    grid-template-columns: repeat(
+      var(--bgTabbedAmountOfTabs),
+      min(301px, 75vw)
+    ); /* 253px (design size) + 2*24px (padding) */
+    gap: 32px;
+    overflow-x: scroll;
     padding-inline: var(--pagePadding);
-    gap: 48px;
+    padding-block: 64px;
   }
-  spicy-sections h3[aria-selected="true"] {
-    background-color: var(--headingActiveBackgroundColor);
-    color: var(--headingActiveTextColor) !important;
+  .text-bg-image-tabbed-mobile > .text-bg-image-tabbed-tab {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* padding: 24px; */
+  }
+  .text-bg-image-tabbed-mobile > .text-bg-image-tabbed-tab img {
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  /* Desktop */
+  .text-bg-image-tabbed-desktop {
+    display: none;
+  }
+  @media screen and (min-width: 512px) {
+    .text-bg-image-tabbed-mobile {
+      display: none;
+    }
+    .text-bg-image-tabbed-desktop {
+      display: flex;
+    }
+    .text-bg-image-tabbed-content {
+      align-self: flex-end;
+    }
+
+    spicy-sections {
+      --const-mq-affordances: [screen and (min-width: 0px)] tab-bar;
+      width: 100% !important;
+      min-height: 80vh;
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-block: 48px;
+      margin-bottom: -1rem;
+    }
+    spicy-sections img {
+      position: absolute;
+      height: 100%;
+      top: -1rem;
+    }
+    spicy-sections h3 {
+      font-size: 1.25;
+      overflow: wrap;
+      position: relative;
+      z-index: 9;
+      background-color: var(--bgTabbedHeadingBackgroundColor);
+      color: var(--bgTabbedHeadingTextColor) !important;
+      padding: 20px;
+    }
+    spicy-sections::part(tab-bar) {
+      width: 100%;
+      max-width: var(--pageContainer);
+      margin: 0 auto;
+    }
+    spicy-sections::part(tab-list) {
+      display: flex;
+      flex-wrap: wrap;
+      padding-inline: var(--pagePadding);
+      gap: 48px;
+    }
+    spicy-sections h3[aria-selected="true"] {
+      background-color: var(--bgTabbedHeadingActiveBackgroundColor);
+      color: var(--bgTabbedHeadingActiveTextColor) !important;
+    }
   }
 </style>
 
-<style is:global define:vars={{ textBackgroundColor, textColor }}>
-  .text-bg-image-tabbed spicy-sections .markdown-text {
-    max-width: var(--pageContainer) !important;
-    margin: 0 auto;
-    padding-inline: var(--pagePadding);
+<style
+  is:global
+  define:vars={{
+    bgTabbedDesktopTextBackgroundColor,
+    bgTabbedDesktopTextColor,
+    mobileTextColor,
+  }}
+>
+  .text-bg-image-tabbed-mobile .markdown-text > * {
+    color: var(--mobileTextColor);
+    padding-top: 32px;
   }
-  .text-bg-image-tabbed spicy-sections .markdown-text > * {
-    position: relative !important;
-    color: var(--textColor);
-    background-color: var(--textBackgroundColor);
-    max-width: 540px;
-    margin-bottom: 0;
-    padding-block: 16px;
-    padding-inline: 37px;
-  }
-  .text-bg-image-tabbed spicy-sections .markdown-text > *:first-child {
-    padding-top: 47px;
-    margin-top: 96px;
-  }
-  .text-bg-image-tabbed spicy-sections .markdown-text > *:last-child {
-    padding-bottom: 29px;
+  @media screen and (min-width: 512px) {
+    .text-bg-image-tabbed-desktop spicy-sections .markdown-text {
+      max-width: var(--pageContainer) !important;
+      margin: 0 auto;
+      padding-inline: var(--pagePadding);
+    }
+    .text-bg-image-tabbed-desktop spicy-sections .markdown-text > * {
+      position: relative !important;
+      color: var(--bgTabbedDesktopTextColor);
+      background-color: var(--bgTabbedDesktopTextBackgroundColor);
+      max-width: 540px;
+      margin-bottom: 0;
+      padding-block: 16px;
+      padding-inline: 37px;
+    }
+    .text-bg-image-tabbed-desktop
+      spicy-sections
+      .markdown-text
+      > *:first-child {
+      padding-top: 47px;
+      margin-top: 96px;
+    }
+    .text-bg-image-tabbed-desktop spicy-sections .markdown-text > *:last-child {
+      padding-bottom: 29px;
+    }
   }
 </style>

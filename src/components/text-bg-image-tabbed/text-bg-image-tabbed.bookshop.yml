@@ -12,15 +12,18 @@ spec:
 
 # Defines the structure of this component, as well as the default values
 blueprint:
-  tab_styles:
-    heading_background_color: '#a0a2ff'
+  mobile_styles:
+    background_color: '#58825F'
+    text_color: '#F9EEDE'
+  desktop_tab_styles:
+    heading_background_color: '#F9EEDE'
     heading_text_color: '#58825F'
-    heading_active_background_color: '#a0a2ff'
-    heading_active_text_color: '#58825F'
-    text_background_color: '#a0a2ff'
+    heading_active_background_color: '#58825F'
+    heading_active_text_color: '#F9EEDE'
+    text_background_color: '#F9EEDE'
     text_color: '#272D2D'
   tabs:
-    - background_image:
+    - image:
         image_path: 
         alt_text: 
       text:
@@ -43,7 +46,7 @@ _inputs:
         subtext:
           - key: text_color
           - 'Update heading gradient color and text content.'
-  background_image:
+  image:
     options:
       preview:
         icon: 'image'

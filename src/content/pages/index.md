@@ -85,7 +85,10 @@ content_blocks:
       alt_text: An image
     flipped: true
   - _bookshop_name: text-bg-image-tabbed
-    tab_styles:
+    mobile_styles:
+      background_color: '#58825F'
+      text_color: '#F9EEDE'
+    desktop_tab_styles:
       heading_background_color: '#F9EEDE'
       heading_text_color: '#58825F'
       heading_active_background_color: '#58825F'
@@ -93,7 +96,7 @@ content_blocks:
       text_background_color: '#F9EEDE'
       text_color: '#272D2D'
     tabs:
-      - background_image:
+      - image:
           image_path: /src/assets/images/becca-triangle.jpeg
           alt_text: A bg image
         text:
@@ -103,10 +106,7 @@ content_blocks:
 
 
             Ashtanga Yoga is a dynamic practice centred on self-practice and one-on-one instruction, using the Tristhana Method. This method integrates breath, postures, and Drishti (a single point of focus) to cultivate concentration. Students progress through set series at their own pace, guided by their breath, with individualised support from the teacher.
-
-
-            Ashtanga Yoga is a dynamic practice centred on self-practice and one-on-one instruction, using the Tristhana Method. This method integrates breath, postures, and Drishti (a single point of focus) to cultivate concentration. Students progress through set series at their own pace, guided by their breath, with individualised support from the teacher.
-      - background_image:
+      - image:
           image_path: /src/assets/images/becca-side-pose.jpeg
           alt_text: A bg image
         text:
@@ -116,7 +116,7 @@ content_blocks:
 
 
             Vinyasa flow is a creative practice where postures are linked together with the breath in a flowing sequence. The beauty of Vinyasa is the variety, there isn’t a set sequence, so the style, pace and intensity will all vary depending on the class.
-      - background_image:
+      - image:
           image_path: /src/assets/images/becca-breathe.jpeg
           alt_text: A bg image
         text:
@@ -126,7 +126,7 @@ content_blocks:
 
 
             Prāṇāyāma is an ancient breathing technique originating from India. It involves controlling your breath in different styles and lengths to connect with the body and mind.
-      - background_image:
+      - image:
           image_path: /src/assets/images/becca-child-pose.jpeg
           alt_text: A bg image
         text:
