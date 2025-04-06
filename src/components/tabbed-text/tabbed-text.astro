@@ -21,13 +21,15 @@ const { background_color, tabs } = Astro.props;
 ---
 
 <div class="tabbed-text" style={`background-color: ${background_color};`}>
-  <div x-data="{ selectedTab: 0 }" id="tab_wrapper">
+  <div x-data="{ selectedTab: 0 }" class="tab_wrapper">
     <!-- The tabs navigation -->
     <nav>
       {
         tabs.map((tab, index) => {
           return (
-            <button x-on:click={`selectedTab = ${index}`} class="color-button">
+            <button
+              x-on:click={`selectedTab = ${index + 1}`}
+              class="color-button">
               {tab.tab_heading}
             </button>
           );
@@ -35,17 +37,20 @@ const { background_color, tabs } = Astro.props;
       }
     </nav>
 
-    {
-      tabs.map((tab, index) => {
-        return (
-          <div
-            class="tab-content"
-            x-bind:class={`selectedTab == ${index} ? 'show' : 'hide'`}>
-            {tab.text_content}
-          </div>
-        );
-      })
-    }
+    <div class="">
+      {
+        tabs.map((tab, index) => {
+          return (
+            <div
+              class="tab-content"
+              x-bind:class={`selectedTab == ${index + 1} ? 'show' : 'hide'`}>
+              <button x-on:click={`selectedTab = 0`}>Close</button>
+              <p>{tab.text_content}</p>
+            </div>
+          );
+        })
+      }
+    </div>
   </div>
 </div>
 
@@ -54,22 +59,26 @@ const { background_color, tabs } = Astro.props;
     position: relative;
     padding-inline: 48px;
     overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
   }
   .tab-content {
-    position: absolute;
-    z-index: 99;
     background-color: white;
+    top: 0;
+    position: absolute;
+    width: 90vw;
   }
   .hide {
     left: 100vw;
-    opacity: 0;
     z-index: 0;
     transition-property: opacity left;
     transition-duration: 2s;
   }
   .show {
+    z-index: 99;
     transition-property: left;
     transition-duration: 2s;
     left: 0vw;
+    opacity: 1;
   }
 </style>
