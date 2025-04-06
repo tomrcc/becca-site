@@ -27,13 +27,13 @@ const {
 ---
 
 <div class="tabbed-text" style={`background-color: ${background_color};`}>
-  <div x-data="{ left: '100vw' }" id="tab_wrapper">
+  <div x-data="{ selectedTab: 0 }" id="tab_wrapper">
     <!-- The tabs navigation -->
     <nav>
       {
-        tabs.map((tab) => {
+        tabs.map((tab, index) => {
           return (
-            <button x-on:click="left = '0vw'" class="color-button">
+            <button x-on:click={`selectedTab = ${index}`} class="color-button">
               {tab.tab_heading}
             </button>
           );
@@ -42,11 +42,11 @@ const {
     </nav>
 
     {
-      tabs.map((tab) => {
+      tabs.map((tab, index) => {
         return (
           <div
             class="tab-content"
-            x-bind:style="'left: ' + left + ' !important'">
+            x-bind:class={`selectedTab == ${index} ? 'show' : 'hide'`}>
             {tab.text_content}
           </div>
         );
@@ -55,7 +55,7 @@ const {
   </div>
 </div>
 
-<style>
+<style is:global>
   .tab_wrapper {
     position: relative;
   }
@@ -64,5 +64,17 @@ const {
     z-index: 999;
     background-color: white;
     padding: 96px;
+  }
+  .hide {
+    left: 100vw;
+    opacity: 0;
+    z-index: 0;
+    transition-property: opacity left;
+    transition-duration: 2s;
+  }
+  .show {
+    transition-property: left;
+    transition-duration: 2s;
+    left: 0vw;
   }
 </style>
