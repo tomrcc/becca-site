@@ -1,0 +1,68 @@
+---
+import Markdown from "../utility/markdown.astro";
+
+interface Props {
+  background_color: string;
+  tab_heading_inactive_color: string;
+  tab_text_color: string;
+  heading: {
+    heading_text: string;
+    text_color: string;
+  };
+  tabs: [
+    {
+      tab_heading: string;
+      text_content: string;
+    },
+  ];
+}
+
+const {
+  background_color,
+  tab_heading_inactive_color,
+  tab_text_color,
+  heading,
+  tabs,
+} = Astro.props;
+---
+
+<div class="tabbed-text" style={`background-color: ${background_color};`}>
+  <div x-data="{ left: '100vw' }" id="tab_wrapper">
+    <!-- The tabs navigation -->
+    <nav>
+      {
+        tabs.map((tab) => {
+          return (
+            <button x-on:click="left = '0vw'" class="color-button">
+              {tab.tab_heading}
+            </button>
+          );
+        })
+      }
+    </nav>
+
+    {
+      tabs.map((tab) => {
+        return (
+          <div
+            class="tab-content"
+            x-bind:style="'left: ' + left + ' !important'">
+            {tab.text_content}
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  .tab_wrapper {
+    position: relative;
+  }
+  .tab-content {
+    position: absolute;
+    z-index: 999;
+    background-color: white;
+    padding: 96px;
+  }
+</style>

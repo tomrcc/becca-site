@@ -2,13 +2,11 @@
 spec:
   structures:
     - content_blocks
-  label: Left Right - Tabbed
-  description: Tabbed text next to image
-  icon: 'chrome_reader_mode'
+  label: Tabbed text
+  description: Tabs of plain text
+  icon: 'tab'
   tags:
     - Tabs
-    - Image
-    - Flippable
 
 # Defines the structure of this component, as well as the default values
 blueprint:
@@ -28,10 +26,6 @@ blueprint:
         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
         est laborum.
       text_color: '#272D2D'
-  image:
-    image_path: /src/assets/images/undraw-hello.svg
-    alt_text: An image
-  flipped: true
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
@@ -48,17 +42,3 @@ _inputs:
         subtext:
           - key: heading_gradient_color
           - 'Update heading gradient color and text content.'
-  image:
-    options:
-      preview:
-        icon: 'image'
-        text:
-          - key: alt_text
-          - 'Image'
-        subtext:
-          - key: image_path
-          - 'Update image'
-        image:
-          - key: image_path
-  flipped:
-    type: switch
