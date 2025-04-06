@@ -21,7 +21,7 @@ const { background_color, tabs } = Astro.props;
 ---
 
 <div class="tabbed-text" style={`background-color: ${background_color};`}>
-  <div x-data="{ selectedTab: 0 }" class="tab_wrapper">
+  <div x-data="{ selectedTab: 0, closingTab: '' }" class="tab_wrapper">
     <!-- The tabs navigation -->
     <nav>
       {
@@ -43,8 +43,11 @@ const { background_color, tabs } = Astro.props;
           return (
             <div
               class="tab-content"
-              x-bind:class={`selectedTab == ${index + 1} ? 'show' : 'hide'`}>
-              <button x-on:click={`selectedTab = 0`}>Close</button>
+              x-bind:class={`[(closingTab == '${index + 1}' ? 'closeTab' : ''), (selectedTab === ${index + 1} ? 'showTab' : 'hideTab')]`}>
+              <button
+                x-on:click={`selectedTab = 0, closingTab = '${index + 1}'`}>
+                Close
+              </button>
               <p>{tab.text_content}</p>
             </div>
           );
@@ -53,32 +56,71 @@ const { background_color, tabs } = Astro.props;
     </div>
   </div>
 </div>
+<!-- 
+TODO: To solve the height problem:
+Make all the text tabs line up in a row off the screen which will make the containing div the height of the tallest one
+Have the nav positioned absolute overtop of them with a height of 100% of the containing div
+When a tab is selected move the text tabs behind the nav into the correct position
+Once they're in position move the nav left off the screen
+-->
 
 <style is:global>
   .tab_wrapper {
     position: relative;
-    padding-inline: 48px;
+    padding-block: 48px;
     overflow-x: hidden;
-    overflow-y: hidden;
-    height: 100vh;
+    height: clamp(500px, 80vh, 1000px);
+  }
+  .tab_wrapper nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 2rem;
   }
   .tab-content {
     background-color: white;
     top: 0;
     position: absolute;
+    min-height: 100%;
+    height: fit-content;
     width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  .hide {
+  .hideTab {
     left: 100vw;
+    display: none;
     z-index: 0;
-    transition-property: opacity left;
-    transition-duration: 2s;
   }
-  .show {
+  .closeTab {
+    animation: slideOutRight 800ms;
+  }
+  .showTab {
     z-index: 99;
-    transition-property: left;
-    transition-duration: 2s;
-    left: 0vw;
-    opacity: 1;
+    animation: slideInLeft 1000ms;
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      display: flex;
+      left: 100vw;
+    }
+    100% {
+      left: 0vw;
+    }
+  }
+  @keyframes slideOutRight {
+    0% {
+      display: flex;
+      left: 0vw;
+    }
+    100% {
+      display: none;
+      left: 100vw;
+    }
   }
 </style>
