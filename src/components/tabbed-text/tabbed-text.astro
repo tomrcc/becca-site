@@ -17,13 +17,7 @@ interface Props {
   ];
 }
 
-const {
-  background_color,
-  tab_heading_inactive_color,
-  tab_text_color,
-  heading,
-  tabs,
-} = Astro.props;
+const { background_color, tabs } = Astro.props;
 ---
 
 <div class="tabbed-text" style={`background-color: ${background_color};`}>
@@ -58,12 +52,13 @@ const {
 <style is:global>
   .tab_wrapper {
     position: relative;
+    padding-inline: 48px;
+    overflow-x: hidden;
   }
   .tab-content {
     position: absolute;
-    z-index: 999;
+    z-index: 99;
     background-color: white;
-    padding: 96px;
   }
   .hide {
     left: 100vw;
