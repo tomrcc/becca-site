@@ -2,7 +2,7 @@
   { "name": "White", "value": "#ffffff" },
   { "name": "Black", "value": "#000000" },
   { "name": "Off Black", "value": "#272D2D" },
-  { "name": "Gray", "value": "#272D2D99" },
+  { "name": "Gray", "value": "#272D2D80" },
   { "name": "Pale Yellow", "value": "#F9EEDE" },
   { "name": "Dark Orange", "value": "#B77763" },
   { "name": "Green", "value": "#58825F" }

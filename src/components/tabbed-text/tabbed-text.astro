@@ -1,100 +1,135 @@
 ---
+import Icon from "../utility/icon";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
   background_color: string;
-  tab_heading_inactive_color: string;
-  tab_text_color: string;
   heading: {
     heading_text: string;
     text_color: string;
+  };
+  tab_headings: {
+    tab_headings_text_color: string;
+    tab_subheadings_text_content: string;
+    tab_subheadings_text_color: string;
   };
   tabs: [
     {
       tab_heading: string;
       text_content: string;
+      text_color: string;
+      background_color: string;
     },
   ];
 }
 
-const { background_color, tabs } = Astro.props;
+const { background_color, heading, tab_headings, tabs } = Astro.props;
 ---
 
-<div class="tabbed-text" style={`background-color: ${background_color};`}>
-  <div x-data="{ selectedTab: 0, closingTab: '' }" class="tab_wrapper">
+<section class="tabbed-text" style={`background-color: ${background_color};`}>
+  <div x-data="{ selectedTab: 0, closingTab: '' }" class="tab-wrapper">
+    <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
     <!-- The tabs navigation -->
     <nav>
       {
         tabs.map((tab, index) => {
           return (
-            <button
-              x-on:click={`selectedTab = ${index + 1}`}
-              class="color-button">
-              {tab.tab_heading}
+            <button x-on:click={`selectedTab = ${index + 1}`}>
+              <p style={`color: ${tab_headings.tab_headings_text_color};`}>
+                {tab.tab_heading}
+              </p>
+              <p style={`color: ${tab_headings.tab_subheadings_text_color};`}>
+                {tab_headings.tab_subheadings_text_content}
+                <span>
+                  <Icon icon={"Plus"} />
+                </span>
+              </p>
             </button>
           );
         })
       }
     </nav>
-
-    <div class="">
+    <!-- The tabs -->
+    <ul>
       {
         tabs.map((tab, index) => {
           return (
-            <div
+            <li
               class="tab-content"
+              style={`background-color: ${tab.background_color};`}
               x-bind:class={`[(closingTab == '${index + 1}' ? 'closeTab' : ''), (selectedTab === ${index + 1} ? 'showTab' : 'hideTab')]`}>
               <button
+                class="close-button"
                 x-on:click={`selectedTab = 0, closingTab = '${index + 1}'`}>
-                Close
+                <Icon icon={"Close"} />
               </button>
-              <p>{tab.text_content}</p>
-            </div>
+              <p style={`color: ${tab.text_color};`}>{tab.text_content}</p>
+            </li>
           );
         })
       }
-    </div>
+    </ul>
   </div>
-</div>
-<!-- 
-TODO: To solve the height problem:
-Make all the text tabs line up in a row off the screen which will make the containing div the height of the tallest one
-Have the nav positioned absolute overtop of them with a height of 100% of the containing div
-When a tab is selected move the text tabs behind the nav into the correct position
-Once they're in position move the nav left off the screen
--->
+</section>
 
-<style is:global>
-  .tab_wrapper {
+<style>
+  section {
     position: relative;
-    padding-block: 48px;
-    overflow-x: hidden;
-    height: clamp(500px, 80vh, 1000px);
   }
-  .tab_wrapper nav {
+  .tab-wrapper {
+    max-width: var(--pageContainer);
+    margin: 0 auto;
+    overflow-x: hidden;
+    min-height: 80vh;
+    padding-block: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+  }
+  .tab-wrapper h2 {
+    padding-inline: var(--pagePadding);
+  }
+  .tab-wrapper nav {
+    padding-inline: var(--pagePadding);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start;
     gap: 2rem;
   }
   .tab-content {
-    background-color: white;
-    top: 0;
     position: absolute;
-    min-height: 100%;
+    top: 0;
+    width: 100vw;
     height: fit-content;
-    width: 90vw;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-inline: var(--pagePadding);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  }
+  .tab-wrapper nav button p {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tab-wrapper nav button p span {
+    width: 0.5rem;
+  }
+  .tab-content .close-button {
+    width: 1rem;
+    align-self: flex-end;
+    margin-bottom: 2rem;
   }
   .hideTab {
-    left: 100vw;
     display: none;
     z-index: 0;
+    left: 100vw;
   }
   .closeTab {
     animation: slideOutRight 800ms;

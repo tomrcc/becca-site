@@ -54,7 +54,7 @@ content_blocks:
         text_color: "#ffffff"
   - _bookshop_name: left-right-tabbed
     background_color: '#F9EEDE'
-    tab_heading_inactive_color: '#272D2D99'
+    tab_heading_inactive_color: '#272D2D80'
     tab_text_color: '#272D2D'
     heading:
       heading_text: Meet Becca
@@ -137,12 +137,14 @@ content_blocks:
             
             Yin-Yin Yoga is a slow paced meditative practice that works deeply into the connected tissue and fascia with passive, longer-held postures. Practiced mainly on the ground, holding postures from 2-5 minutes using props to support the body. 
   - _bookshop_name: tabbed-text
-    background_color: '#ffffff'
-    text_color: '#333'
-    tab_heading_inactive_color: '#39393999'
+    background_color: '#F9EEDE'
     heading:
       heading_text: Offerings
-      color: '#393939'
+      text_color: '#393939'
+    tab_headings:
+      tab_headings_text_color: '#393939'
+      tab_subheadings_text_content: Read more
+      tab_subheadings_text_color: '#272D2D80'
     tabs:
       - tab_heading: 1:1 in Person or Online
         text_content: >-
@@ -168,6 +170,7 @@ content_blocks:
 
           Interested? Contact Becca here.
         text_color: '#272D2D'
+        background_color: '#F9EEDE'
       - tab_heading: Private Group Yoga Package
         text_content: >-
           Book a one-off session or schedule in a weekly class. Whether you've practiced before or never stepped on a mat, let Becca bring the benefits of Yoga to you. Perfect to bring your team together, for company wellness, a day retreat or kids yoga.
@@ -194,6 +197,7 @@ content_blocks:
 
           Interested? Contact Becca here.
         text_color: '#272D2D'
+        background_color: '#F9EEDE'
       - tab_heading: Self Practice Package
         text_content: >-
           Want a fulfilling Yoga self practice at home but unsure where to start?
@@ -216,6 +220,7 @@ content_blocks:
           Meet to practice 1-2 times a week guided by Becca (minimum once a week requirement for first 2 months). 
           A bespoke weekly practice plan just for you, centred around your schedule and lifestyle that maps out what to practice and how to fit it in with your life. Enjoy the accountability of a class with Becca alongside a tailored plan for you to practice in your own time.
         text_color: '#272D2D'
+        background_color: '#F9EEDE'
       - tab_heading: Self Practice Plus Package
         text_content: >-
           Get everything from the self practice package but with added extras. 
@@ -245,6 +250,7 @@ content_blocks:
 
           Support and community - message Becca questions and join the Hihi Yoga community to share ideas and inspiration with other practitioners.     
         text_color: '#272D2D'
+        background_color: '#F9EEDE'
       - tab_heading: Online Studio
         text_content: >-
           Ever since I started my Yoga journey online it has been a dream of mine to offer an online platform. I want to give others the chance to gain the benefit of Yoga from anywhere in the world, be a part of a supportive community and grow a fulfilling Yoga practice. 
@@ -264,4 +270,5 @@ content_blocks:
            
           See membership options here. Start your free 7-day trial and join the community today! 
         text_color: '#272D2D'
+        background_color: '#F9EEDE'
 ---
