@@ -29,36 +29,41 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
 <section class="tabbed-text" style={`background-color: ${background_color};`}>
   <div
     x-data="{ selectedTab: 0, closingTab: '' }"
-    class="tab-wrapper"
+    class="mobile-tab-wrapper"
     @click.outside="closingTab = selectedTab, selectedTab = 0">
-    <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
     <!-- The tabs navigation -->
     <nav>
-      {
-        tabs.map((tab, index) => {
-          return (
-            <button x-on:click={`selectedTab = ${index + 1}`}>
-              <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
-                {tab.tab_heading}
-              </h3>
-              <p style={`color: ${tab_headings.tab_subheadings_text_color};`}>
-                {tab_headings.tab_subheadings_text_content}
-                <span>
-                  <Icon icon={"Plus"} />
-                </span>
-              </p>
-            </button>
-          );
-        })
-      }
+      <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+      <ul>
+        {
+          tabs.map((tab, index) => {
+            return (
+              <li>
+                <button x-on:click={`selectedTab = ${index + 1}`}>
+                  <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
+                    {tab.tab_heading}
+                  </h3>
+                  <p
+                    style={`color: ${tab_headings.tab_subheadings_text_color};`}>
+                    {tab_headings.tab_subheadings_text_content}
+                    <span>
+                      <Icon icon={"Plus"} />
+                    </span>
+                  </p>
+                </button>
+              </li>
+            );
+          })
+        }
+      </ul>
     </nav>
     <!-- The tabs -->
-    <ul>
+    <ul class="mobile-tabs-list">
       {
         tabs.map((tab, index) => {
           return (
             <li
-              class="tab-content"
+              class="mobile-tab-content"
               style={`background-color: ${tab.background_color};`}
               x-bind:class={`[(closingTab == '${index + 1}' ? 'closeTab' : ''), (selectedTab === ${index + 1} ? 'showTab' : 'hideTab')]`}>
               <button
@@ -76,13 +81,68 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
       }
     </ul>
   </div>
+
+  <!-- Desktop -->
+  <div x-data="{ selectedTab: 1 }" class="tab-wrapper">
+    <!-- The tabs navigation -->
+    <nav>
+      <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+      <ul>
+        {
+          tabs.map((tab, index) => {
+            return (
+              <li>
+                <button x-on:click={`selectedTab = ${index + 1}`}>
+                  <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
+                    {tab.tab_heading}
+                  </h3>
+                  <p
+                    style={`color: ${tab_headings.tab_subheadings_text_color};`}>
+                    {tab_headings.tab_subheadings_text_content}
+                    <span>
+                      <Icon icon={"Plus"} />
+                    </span>
+                  </p>
+                </button>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+    <!-- The tabs -->
+    <ul class="tabs-list">
+      {
+        tabs.map((tab, index) => {
+          return (
+            <li
+              class="tab-content"
+              style={`background-color: ${tab.background_color};`}
+              x-bind:class={`selectedTab === ${index + 1} ? 'showTab' : 'hideTab'`}>
+              <div style={`color: ${tab.text_color};`}>
+                <h3>{tab.tab_heading}</h3>
+                <Markdown content={tab.text_content} />
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
 </section>
 
 <style>
   section {
     position: relative;
   }
+
   .tab-wrapper {
+    display: none;
+  }
+  .tab-content {
+    display: none;
+  }
+  .mobile-tab-wrapper {
     max-width: var(--pageContainer);
     margin: 0 auto;
     overflow-x: hidden;
@@ -90,14 +150,14 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     padding-block: 48px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
     gap: 40px;
   }
-  .tab-wrapper h2 {
+  .mobile-tab-wrapper nav h2 {
     padding-inline: var(--pagePadding);
+    padding-block: 30px;
+    font-size: 1.5rem;
   }
-  .tab-wrapper nav {
+  .mobile-tab-wrapper nav ul {
     padding-inline: var(--pagePadding);
     display: flex;
     flex-direction: column;
@@ -105,7 +165,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     align-items: flex-start;
     gap: 2rem;
   }
-  .tab-content {
+  .mobile-tab-content {
     position: absolute;
     top: 0;
     width: 100vw;
@@ -119,21 +179,21 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     padding-block: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   }
-  .tab-content h3 {
+  .mobile-tab-content h3 {
     font-weight: 500;
     font-size: 20px;
     margin-bottom: 32px;
   }
-  .tab-wrapper nav button p {
+  .mobile-tab-wrapper nav button p {
     text-align: left;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  .tab-wrapper nav button p span {
+  .mobile-tab-wrapper nav button p span {
     width: 0.5rem;
   }
-  .tab-content .close-button {
+  .mobile-tab-content .close-button {
     width: 1rem;
     align-self: flex-end;
     margin-bottom: 2rem;
@@ -147,10 +207,10 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     animation: slideOutRight 800ms;
   }
   .showTab {
+    display: flex;
     z-index: 99;
     animation: slideInLeft 1000ms;
   }
-
   @keyframes slideInLeft {
     0% {
       display: flex;
@@ -168,6 +228,96 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     100% {
       display: none;
       left: 100vw;
+    }
+  }
+  @keyframes slideInLeft {
+    0% {
+      display: flex;
+      left: 100vw;
+    }
+    100% {
+      left: 0vw;
+    }
+  }
+  @keyframes slideOutRight {
+    0% {
+      display: flex;
+      left: 0vw;
+    }
+    100% {
+      display: none;
+      left: 100vw;
+    }
+  }
+
+  /* Desktop styles */
+  @media screen and (min-width: 768px) {
+    .tab-wrapper {
+      display: flex;
+    }
+    .tab-content {
+      display: flex;
+    }
+    .mobile-tab-wrapper {
+      display: none;
+    }
+    .mobile-tab-content {
+      display: none;
+    }
+
+    .tab-wrapper {
+      max-width: var(--pageContainer);
+      margin: 0 auto;
+      padding-block: 48px;
+      display: flex;
+      gap: 40px;
+    }
+    .tab-wrapper nav h2 {
+      padding-inline: var(--pagePadding);
+      padding-block: 30px;
+      font-size: 1.5rem;
+    }
+    .tab-wrapper nav ul {
+      padding-inline: var(--pagePadding);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-width: max-content;
+      gap: 2rem;
+    }
+    .tab-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-inline: var(--pagePadding);
+      padding-block: 30px;
+    }
+    .tab-content h3 {
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 32px;
+    }
+    .tab-wrapper nav button p {
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tab-wrapper nav button p span {
+      width: 0.5rem;
+    }
+    .hideTab {
+      display: none;
+      z-index: 0;
+      left: 0;
+    }
+    .closeTab {
+      animation: none;
+    }
+    .showTab {
+      animation: none;
     }
   }
 </style>
