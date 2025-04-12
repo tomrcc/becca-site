@@ -27,7 +27,10 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
 ---
 
 <section class="tabbed-text" style={`background-color: ${background_color};`}>
-  <div x-data="{ selectedTab: 0, closingTab: '' }" class="tab-wrapper">
+  <div
+    x-data="{ selectedTab: 0, closingTab: '' }"
+    class="tab-wrapper"
+    @click.outside="closingTab = selectedTab, selectedTab = 0">
     <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
     <!-- The tabs navigation -->
     <nav>
@@ -35,9 +38,9 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
         tabs.map((tab, index) => {
           return (
             <button x-on:click={`selectedTab = ${index + 1}`}>
-              <p style={`color: ${tab_headings.tab_headings_text_color};`}>
+              <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
                 {tab.tab_heading}
-              </p>
+              </h3>
               <p style={`color: ${tab_headings.tab_subheadings_text_color};`}>
                 {tab_headings.tab_subheadings_text_content}
                 <span>
@@ -63,7 +66,10 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
                 x-on:click={`selectedTab = 0, closingTab = '${index + 1}'`}>
                 <Icon icon={"Close"} />
               </button>
-              <p style={`color: ${tab.text_color};`}>{tab.text_content}</p>
+              <div style={`color: ${tab.text_color};`}>
+                <h3>{tab.tab_heading}</h3>
+                <Markdown content={tab.text_content} />
+              </div>
             </li>
           );
         })
@@ -110,7 +116,13 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     justify-content: center;
     align-items: center;
     padding-inline: var(--pagePadding);
+    padding-block: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  }
+  .tab-content h3 {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 32px;
   }
   .tab-wrapper nav button p {
     text-align: left;
