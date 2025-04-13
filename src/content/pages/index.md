@@ -272,4 +272,7 @@ content_blocks:
         text_color: '#272D2D'
         background_color: '#F9EEDE'
   - _bookshop_name: slider
+    background_image:
+      image_path: /src/assets/images/jade-stephens-unsplash.jpeg
+      alt_text: Jade Stephens Unsplash - Clouds over a sea
 ---
