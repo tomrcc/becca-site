@@ -84,6 +84,8 @@ const canonicalURL = new URL(seo?.canonical_url ?? Astro.url.pathname, baseUrl);
       <slot />
     </main>
     <Footer />
+    <!-- Scripts -->
     <script src="/js/SpicySections.js" async is:inline></script>
+    <script src="src/assets/js/swiper.js"></script>
   </body>
 </html>

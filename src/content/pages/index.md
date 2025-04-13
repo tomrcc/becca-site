@@ -271,4 +271,5 @@ content_blocks:
           See membership options here. Start your free 7-day trial and join the community today! 
         text_color: '#272D2D'
         background_color: '#F9EEDE'
+  - _bookshop_name: slider
 ---
