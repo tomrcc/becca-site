@@ -31,26 +31,28 @@ const imageSrc =
 ---
 
 <div class="swiper-body">
-  <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      {
-        slides?.map((slide) => {
-          return (
-            <div class="swiper-slide" style={`color: ${slide.text_color};`}>
-              <div class="slide-text-content">
-                <h3>{slide.slide_heading}</h3>
-                <Markdown content={slide.text_content} />
+  <div class="swiper-container">
+    <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {
+          slides?.map((slide) => {
+            return (
+              <div class="swiper-slide" style={`color: ${slide.text_color};`}>
+                <div class="slide-text-content">
+                  <h3>{slide.slide_heading}</h3>
+                  <Markdown content={slide.text_content} />
+                </div>
               </div>
-            </div>
-          );
-        })
-      }
+            );
+          })
+        }
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-scrollbar"></div>
     </div>
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-scrollbar"></div>
   </div>
   {
     imageSrc ? (
@@ -72,7 +74,32 @@ const imageSrc =
       position: relative;
       overflow-y: hidden;
       padding-block: 96px;
-      padding-inline: var(--pagePadding);
+      --swiper-navigation-top-offset: 95%;
+    }
+    .swiper-container {
+      max-width: var(--pageContainer);
+      margin: 0 auto;
+    }
+    .swiper-button-prev:after,
+    .swiper-rtl .swiper-button-next::after,
+    .swiper-button-next:after,
+    .swiper-rtl .swiper-button-prev::after {
+      display: inline-flex;
+      content: "";
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 1rem;
+      width: 2rem;
+    }
+    .swiper-button-next:after,
+    .swiper-rtl .swiper-button-prev::after {
+      background-image: url("icons/pagination-next.svg");
+    }
+
+    .swiper-button-prev:after,
+    .swiper-rtl .swiper-button-next::after {
+      background-image: url("icons/pagination-prev.svg");
     }
     .background-image img {
       position: absolute;
@@ -84,6 +111,7 @@ const imageSrc =
     .swiper-slide {
       padding-inline: 48px;
       margin: auto;
+      padding-inline: var(--pagePadding);
     }
     .slide-text-content {
       max-width: min(840px, 72ch);
@@ -96,6 +124,18 @@ const imageSrc =
     @media screen and (min-width: 768px) {
       .swiper-body {
         padding-block: 300px;
+        --swiper-navigation-top-offset: 50%;
+      }
+      .swiper-button-prev:after,
+      .swiper-rtl .swiper-button-next::after,
+      .swiper-button-next:after,
+      .swiper-rtl .swiper-button-prev::after {
+        /* width: 2rem; */
+      }
+    }
+    @media screen and (min-width: 1028px) {
+      .swiper {
+        --swiper-navigation-sides-offset: 10vw;
       }
     }
   </style>
