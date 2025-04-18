@@ -25,7 +25,8 @@
 .markdown-text p,
 .markdown-text a,
 .markdown-text ol li,
-.markdown-text ul li {
+.markdown-text ul li,
+.markdown-text details {
   color: inherit;
   font-weight: 300;
   letter-spacing: 0.5px;
@@ -59,8 +60,9 @@
   margin-inline: 1rem;
 }
 .markdown-text a {
-  color: blue;
   cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
 }
 .markdown-text sup {
   vertical-align: super;
@@ -106,4 +108,21 @@
 .markdown-text pre {
   margin-block: 1.5rem;
   padding: 1rem;
+}
+.markdown-text details {
+  margin-block: 1.5rem;
+}
+.markdown-text details summary {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.markdown-text details summary::before {
+  content: "+ ";
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.markdown-text details[open] summary::before {
+  content: "− ";
 }

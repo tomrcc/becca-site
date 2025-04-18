@@ -40,7 +40,9 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
             return (
               <li>
                 <button x-on:click={`selectedTab = ${index + 1}`}>
-                  <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
+                  <h3
+                    class="mobile-tab-heading"
+                    style={`color: ${tab_headings.tab_headings_text_color};`}>
                     {tab.tab_heading}
                   </h3>
                   <p
@@ -72,7 +74,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
                 <Icon icon={"Close"} />
               </button>
               <div style={`color: ${tab.text_color};`}>
-                <h3>{tab.tab_heading}</h3>
+                <h3 class="mobile-tab-content-heading">{tab.tab_heading}</h3>
                 <Markdown content={tab.text_content} />
               </div>
             </li>
@@ -93,16 +95,11 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
             return (
               <li>
                 <button x-on:click={`selectedTab = ${index + 1}`}>
-                  <h3 style={`color: ${tab_headings.tab_headings_text_color};`}>
+                  <h3
+                    class="tab-heading"
+                    style={`color: ${tab_headings.tab_headings_text_color};`}>
                     {tab.tab_heading}
                   </h3>
-                  <p
-                    style={`color: ${tab_headings.tab_subheadings_text_color};`}>
-                    {tab_headings.tab_subheadings_text_content}
-                    <span>
-                      <Icon icon={"Plus"} />
-                    </span>
-                  </p>
                 </button>
               </li>
             );
@@ -120,7 +117,6 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
               style={`background-color: ${tab.background_color};`}
               x-bind:class={`selectedTab === ${index + 1} ? 'showTab' : 'hideTab'`}>
               <div style={`color: ${tab.text_color};`}>
-                <h3>{tab.tab_heading}</h3>
                 <Markdown content={tab.text_content} />
               </div>
             </li>
@@ -179,9 +175,15 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     padding-block: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   }
-  .mobile-tab-content h3 {
+  .mobile-tab-heading {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 1.25rem;
+    line-height: 140%;
+  }
+  .mobile-tab-content-heading {
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 140%;
     margin-bottom: 32px;
   }
   .mobile-tab-wrapper nav button p {
@@ -254,6 +256,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
   @media screen and (min-width: 768px) {
     .tab-wrapper {
       display: flex;
+      justify-content: space-between;
     }
     .tab-content {
       display: flex;
@@ -268,9 +271,9 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     .tab-wrapper {
       max-width: var(--pageContainer);
       margin: 0 auto;
-      padding-block: 48px;
+      padding-block: 200px;
       display: flex;
-      gap: 40px;
+      gap: 0px;
     }
     .tab-wrapper nav h2 {
       padding-inline: var(--pagePadding);
@@ -284,7 +287,12 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
       justify-content: center;
       align-items: flex-start;
       min-width: max-content;
-      gap: 2rem;
+      gap: 32px;
+    }
+
+    .tabs-list {
+      display: flex;
+      justify-content: flex-end;
     }
     .tab-content {
       display: flex;
@@ -293,10 +301,12 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
       align-items: center;
       padding-inline: var(--pagePadding);
       padding-block: 30px;
+      max-width: 820px;
     }
-    .tab-content h3 {
+    .tab-heading {
       font-weight: 500;
-      font-size: 20px;
+      font-size: 1.25rem;
+      line-height: 140%;
       margin-bottom: 32px;
     }
     .tab-wrapper nav button p {
@@ -318,6 +328,17 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     }
     .showTab {
       animation: none;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .tab-heading {
+      font-weight: 500;
+      font-size: 2rem;
+      line-height: 140%;
+      margin-bottom: 32px;
+    }
+    .tab-wrapper {
+      gap: 40px;
     }
   }
 </style>
