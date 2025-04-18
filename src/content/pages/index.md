@@ -288,6 +288,26 @@ content_blocks:
         text_color: '#272D2D'
         background_color: '#F9EEDE'
   - _bookshop_name: slider
+    heading:
+      heading_text: Testimonials
+      text_color: '#F9EEDE'
+    slides:
+      - slide_heading: Caylin
+        text_content: >-
+          ‘Becca always made me feel so welcome during class that once we moved to Japan I decided to reach out for private online lessons. I thought maybe it would be hard to have someone teach a physical practice via a screen but it’s just like being in person. We meet online once or twice a week regardless of if we are travelling or at home and she always creates a class that is unique, challenging and tailored to how I’m feeling.’
+        text_color: '#F9EEDE'
+      - slide_heading: Isabelle
+        text_content: >-
+          ‘Becca’s teaching style is exceptional - she combines clear guidance, encouragement, and a deep understanding of the body, making every participant feel confident and empowered to explore their limits safely. Also it was just a lot of fun. We all laughed along the way, without taking it too seriously.’  
+        text_color: '#F9EEDE'
+      - slide_heading: Jodie
+        text_content: >-
+          ‘Becca has an amazing ability to help you grow not just through learning Yoga, but also through learning about your connection to everything around you, your connection to yourself and your ability to check in. As someone plagued by injury, I sought out Yoga to assist in some controlled exercise. Based on injuries and then through surgical recovery Becca was able to personalise and adapt our intentions and classes based on my constantly changing abilities.’
+        text_color: '#F9EEDE'
+      - slide_heading: Emma
+        text_content: >-
+          ‘The improvement in my Yoga technique, knowledge and personal practice has been meteoric since I started public and then private yoga classes with Becca at Hihi Yoga nine months ago.’
+        text_color: '#F9EEDE'
     background_image:
       image_path: /src/assets/images/jade-stephens-unsplash.jpeg
       alt_text: Jade Stephens Unsplash - Clouds over a sea

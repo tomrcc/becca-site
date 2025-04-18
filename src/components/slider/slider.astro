@@ -8,8 +8,19 @@ interface Props {
     image_path: string;
     alt_text: string;
   };
+  heading: {
+    heading_text: string;
+    text_color: string;
+  };
+  slides: [
+    {
+      slide_heading: string;
+      text_content: string;
+      text_color: string;
+    },
+  ];
 }
-const { background_image } = Astro.props;
+const { background_image, heading, slides } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
@@ -20,12 +31,21 @@ const imageSrc =
 ---
 
 <div class="swiper-body">
-  <h2>Testimonials</h2>
+  <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
   <div class="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
+      {
+        slides?.map((slide) => {
+          return (
+            <div class="swiper-slide" style={`color: ${slide.text_color};`}>
+              <div class="slide-text-content">
+                <h3>{slide.slide_heading}</h3>
+                <Markdown content={slide.text_content} />
+              </div>
+            </div>
+          );
+        })
+      }
     </div>
     <div class="swiper-pagination"></div>
     <div class="swiper-button-prev"></div>
@@ -50,13 +70,33 @@ const imageSrc =
   <style>
     .swiper-body {
       position: relative;
+      overflow-y: hidden;
+      padding-block: 96px;
+      padding-inline: var(--pagePadding);
     }
-    .background-image {
+    .background-image img {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+    }
+    .swiper-slide {
+      padding-inline: 48px;
+      margin: auto;
+    }
+    .slide-text-content {
+      max-width: min(840px, 72ch);
+      margin: 0 auto;
+    }
+    .slide-text-content h3 {
+      margin-bottom: 1.75rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      .swiper-body {
+        padding-block: 300px;
+      }
     }
   </style>
 </div>
