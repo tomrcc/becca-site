@@ -1,0 +1,66 @@
+# Metadata about this component, to be used in the CMS
+spec:
+  structures:
+    - content_blocks
+  label: Contact Form
+  description: Contact Form
+  icon: 'form'
+  tags: ['form']
+
+# Defines the structure of this component, as well as the default values
+blueprint:
+  heading:
+    heading_text: Contact Us
+    heading_color: '#ffffff'
+  subheading:
+    subheading_text: Get in touch to order bread, enquire about wholesale, or ask us a question!
+    subheading_color: '#ffffff'
+  contact_details:
+    - label: Address
+      color: '#FFFFFF'
+      icon: LocationPin
+      text: >-
+        [123 Bakery Street](/where/#map)
+    - label: Email
+      color: '#FFFFFF'
+      icon: Envelope
+      text: botybakery@gmail.com
+  form:
+    - label: Email Address
+      color: '#FFFFFF'
+      name: email
+      type: text
+      radio_options: []
+    - label: Name
+      color: '#FFFFFF'
+      name: name
+      type: text
+      radio_options: []
+    - label: Message
+      color: '#FFFFFF'
+      name: message
+      type: textarea
+      radio_options: []
+    - label: Type of Enquiry
+      color: '#FFFFFF'
+      name: subject
+      type: radio
+      radio_options:
+        - label: General
+          value: General Enquiry
+        - label: Wholesale
+          value: Wholesale Enquiry
+
+# Overrides any fields in the blueprint when viewing this component in the component browser
+preview:
+
+# Any extra CloudCannon inputs configuration to apply to the blueprint
+_inputs:
+  contact_details:
+    type: array
+    options:
+      structures: _structures.contact_details
+  form:
+    type: array
+    options:
+      structures: _structures.form

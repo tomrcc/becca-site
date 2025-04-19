@@ -379,4 +379,54 @@ content_blocks:
           text_color: '#F9EEDE'
           link: '#contact'
           button_text: Start free trial
+  - _bookshop_name: contact-form
+    background_color: '#F9EEDE'
+    heading:
+      heading_text: Contact Becca
+      heading_color: "#272D2D"
+    form:
+      - label: First Name
+        color: "#272D2D"
+        name: name
+        type: text
+        width: half
+        radio_options: []
+      - label: Last Name
+        color: "#272D2D"
+        name: name
+        type: text
+        width: half
+        radio_options: []
+      - label: Email
+        color: "#272D2D"
+        name: email
+        type: text
+        width: half
+        radio_options: []
+      - label: Sign up/Interested in
+        color: "#272D2D"
+        name: interested-in
+        type: radio
+        width: half
+        radio_options:
+          - label: General
+            value: General Enquiry
+          - label: Wholesale
+            value: Wholesale Enquiry
+      - label: How did you hear about Hihi yoga?
+        color: "#272D2D"
+        name: how-did-you-hear
+        type: text
+        width: full
+        radio_options: []
+      - label: Message
+        color: "#272D2D"
+        name: message
+        type: textarea
+        width: full
+        radio_options: []
+    button:
+      background_color: "#334154"
+      text_color: "#ffffff"
+      button_text: Send
 ---

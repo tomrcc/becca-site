@@ -1,0 +1,176 @@
+---
+import Icon from "../utility/icon";
+import Markdown from "../utility/markdown.astro";
+
+interface Props {
+  background_color: string;
+  heading: {
+    heading_text: string;
+    heading_color: string;
+  };
+  form: [
+    {
+      label: string;
+      color: string;
+      type: string;
+      name: string;
+      width: string;
+      radio_options: [{ value: string; label: string }];
+    },
+  ];
+  button: {
+    background_color: string;
+    text_color: string;
+    button_text: string;
+  };
+}
+const block = Astro.props;
+---
+
+<section id="contact" style={`background-color: ${block.background_color}`}>
+  <div
+    class="contact-form flex flex-col md:flex-row gap-8 px-8 py-[96px] items-center md:justify-between md:items-start">
+    <h2 style={`color: ${block.heading.heading_color};`}>
+      {block.heading.heading_text}
+    </h2>
+
+    <div class="w-full md:w-1/2 rounded-lg max-w-[32rem]">
+      <form
+        method="post"
+        action="/success/"
+        id="contact-form"
+        class="flex flex-col gap-8">
+        {
+          block.form.map((item) => {
+            return item.type === "text" ? (
+              <div class="text-input-group">
+                <label for={item.name} style={`color: ${item.color}`}>
+                  {item.label}
+                </label>
+                <input type={item.type} id={item.name} name={item.name} />
+              </div>
+            ) : item.type === "textarea" ? (
+              <div class="text-input-group">
+                <label for={item.name} style={`color: ${item.color}`}>
+                  {item.label}
+                </label>
+                <textarea id={item.name} name={item.name} />
+              </div>
+            ) : item.type === "radio" ? (
+              <div class="check-input-group gap-2">
+                <label style={`color: ${item.color}`}>{item.label}</label>
+                <div class="flex flex-col gap-2">
+                  {item.radio_options?.map(
+                    (option: { value?: string; label?: string }) => {
+                      return (
+                        <div class="flex gap-3 items-center">
+                          <input
+                            type="radio"
+                            id={option.label}
+                            name={item.name}
+                            value={option.value}
+                          />
+                          <label
+                            style={`color: ${item.color}`}
+                            for={option.label}>
+                            {option.label}
+                          </label>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              </div>
+            ) : null;
+          })
+        }
+        <input type="hidden" name="inbox_key" value="bakery" />
+        <input type="text" name="_gotcha" style="display: none;" />
+        <input class="form-button" type="submit" value="Send Message" />
+      </form>
+      <script
+        is:inline
+        src="https://www.google.com/recaptcha/api.js?render=SITE_ID_HERE"
+      ></script>
+      <script is:inline>
+        var submitted = false;
+        var tokenCreated = false;
+        var formEl = document.getElementById("contact-form");
+
+        formEl.addEventListener("submit", function (event) {
+          // Check if the recaptcha exists
+          if (!tokenCreated) {
+            // Prevent submission
+            event.preventDefault();
+
+            // Prevent more than one submission
+            if (!submitted) {
+              submitted = true;
+              // needs for recaptacha ready
+              grecaptcha.ready(function () {
+                // do request for recaptcha token
+                // response is promise with passed token
+                grecaptcha
+                  .execute("SITE_ID_HERE", {
+                    action: "create_comment",
+                  })
+                  .then(function (token) {
+                    // add token to form
+                    var input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "g-recaptcha-response";
+                    input.value = token;
+                    formEl.appendChild(input);
+
+                    // resubmit the form
+                    tokenCreated = true;
+                    formEl.submit();
+                  });
+              });
+            }
+          }
+        });
+      </script>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-form {
+    max-width: var(--pageContainer);
+    margin: 0 auto;
+    align-self: flex-end;
+  }
+
+  input,
+  textarea {
+    border: 1px solid #f1f1f1;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: black;
+  }
+  .text-input-group,
+  .check-input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .text-input-group label {
+    line-break: anywhere;
+  }
+  .form-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: white;
+  }
+  .form-button:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 2px 0 1px rgb(193, 193, 193);
+    transform: translateY(-2px);
+  }
+  .form-button:active {
+    box-shadow: 0 0px 0 1px white;
+  }
+</style>
