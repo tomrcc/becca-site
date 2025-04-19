@@ -33,9 +33,9 @@
     ]
   },
   "footer": {
-    "logo": "/images/logos/logo-wordmark-white.png",
+    "logo": "/images/logo.png",
     "logo_url": "/",
-    "copyright": "MyCompany. All rights reserved.",
+    "copyright": "Hihi Yoga. All rights reserved.",
     "background_color": "#333232",
     "color": "#ffffff",
     "links": [
@@ -72,10 +72,6 @@
       {
         "link": "https://www.instagram.com/mycompany",
         "social_icon": "Instagram"
-      },
-      {
-        "link": "https://www.github.com/mycompany",
-        "social_icon": "Github"
       },
       {
         "link": "https://www.youtube.com/mycompany",

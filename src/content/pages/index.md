@@ -311,4 +311,72 @@ content_blocks:
     background_image:
       image_path: /src/assets/images/jade-stephens-unsplash.jpeg
       alt_text: Jade Stephens Unsplash - Clouds over a sea
+  - _bookshop_name: card-grid
+    background_color: '#F9EEDE'
+    heading:
+      heading_text: Hihi Yoga Online Studio Membership
+      text_color: '#272D2D'
+    cards:
+      - heading: 
+          heading_text: Monthly Membership
+          background_color: '#B77763'
+          text_color: '#F9EEDE'
+          subheading_text:
+        background_color: '#F9EEDE'
+        text_color: '#272D2D'
+        card_content_sections:
+          - card_section_heading: Total
+            card_section_content: >-
+              $40 per month <br>($10 a week)
+            font_size: 1.5
+          - card_section_heading: Includes
+            card_section_content: >-
+              - 7 day free trial
+
+              - full access to on-demand library 
+
+              - new class added fortnightly
+
+              - yoga, breathing, mobility and more
+
+              - join a like-minded community  
+
+              - billed monthly, cancel any time
+            font_size: 1
+        button:
+          background_color: '#B77763'
+          text_color: '#F9EEDE'
+          link: '#contact'
+          button_text: Start free trial
+      - heading: 
+          heading_text: Biannual Membership
+          background_color: '#B77763'
+          text_color: '#F9EEDE'
+          subheading_text: Best value
+        background_color: '#F9EEDE'
+        text_color: '#272D2D'
+        card_content_sections:
+          - card_section_heading: Total
+            card_section_content: >-
+              $180 <br>($30 a month)
+            font_size: 1.5
+          - card_section_heading: Includes
+            card_section_content: >-
+              - 7 day free trial
+
+              - full access to on-demand library 
+
+              - new class added fortnightly
+
+              - yoga, breathing, mobility and more  
+
+              - join a like-minded community
+
+              - billed bi-annually 
+            font_size: 1
+        button:
+          background_color: '#B77763'
+          text_color: '#F9EEDE'
+          link: '#contact'
+          button_text: Start free trial
 ---

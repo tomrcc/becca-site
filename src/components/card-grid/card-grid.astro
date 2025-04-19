@@ -1,0 +1,186 @@
+---
+import Markdown from "../utility/markdown.astro";
+
+interface Props {
+  background_color: string;
+  heading: {
+    heading_text: string;
+    text_color: string;
+  };
+  cards: [
+    {
+      background_color: string;
+      text_color: string;
+      heading: {
+        heading_text: string;
+        background_color: string;
+        text_color: string;
+        subheading_text: string;
+      };
+      card_content_sections: [
+        {
+          card_section_heading: string;
+          card_section_content: string;
+          font_size: number;
+        },
+      ];
+      button: {
+        background_color: string;
+        text_color: string;
+        link: string;
+        button_text: string;
+      };
+    },
+  ];
+}
+const { background_color, heading, cards } = Astro.props;
+---
+
+<section class="card-grid" style={`background-color: ${background_color};`}>
+  <div class="card-grid-container">
+    <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+    <div class="cards-list">
+      {
+        cards?.map((card) => {
+          const cardContentSections = card?.card_content_sections;
+          const cardHeadingBackgroundColor = card.heading.background_color;
+          return (
+            <div
+              class="card"
+              style={`border: 1px solid ${cardHeadingBackgroundColor};`}>
+              {card.heading.heading_text ? (
+                <div
+                  class="card-heading"
+                  style={`background-color: ${cardHeadingBackgroundColor}; color: ${card.heading.text_color};`}>
+                  <h3>{card.heading.heading_text}</h3>
+                  {card.heading.subheading_text ? (
+                    <p>{card.heading.subheading_text}</p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
+              <div
+                class="card-details"
+                style={`background-color: ${card.background_color}; color: ${card.text_color};`}>
+                {cardContentSections?.map((content_section, index) => {
+                  return (
+                    <div
+                      class="card-details-section"
+                      style={`font-size: ${content_section.font_size}rem;`}>
+                      <p class="card-details-section-heading">
+                        {content_section.card_section_heading}
+                      </p>
+                      <div class="card-details-section-content">
+                        <Markdown
+                          content={content_section.card_section_content}
+                        />
+                      </div>
+                      {index !== cardContentSections?.length - 1 ? (
+                        <div
+                          class="card-divider"
+                          style={`background-color: ${cardHeadingBackgroundColor};`}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              {card.button.button_text ? (
+                <a
+                  href={card.button.link}
+                  class="card-button"
+                  style={`background-color: ${card.button.background_color}; color: ${card.button.text_color};`}>
+                  {card.button.button_text}
+                </a>
+              ) : (
+                ""
+              )}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .card-grid-container {
+    max-width: var(--pageContainer);
+    padding-inline: var(--pagePadding);
+    padding-block: 96px;
+    margin: 0 auto;
+  }
+
+  .cards-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-heading {
+    min-height: 82px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 32px 40px;
+  }
+  .card-heading h3 {
+    width: min-content;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  .card-heading p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .card-details {
+    padding: 40px;
+  }
+  .card-details-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+  }
+  .card-divider {
+    height: 2px;
+    width: 200%;
+  }
+  .card-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 22px;
+  }
+
+  @media screen and (min-width: 1028px) {
+    .card-grid-container {
+      padding-block: 200px;
+    }
+    .card-heading {
+      min-height: 200px;
+    }
+    .cards-list {
+      grid-template-columns: 1fr 1fr;
+    }
+    .card-divider {
+      display: none;
+    }
+  }
+</style>
+
+<style is:global>
+  .card-details-section-content .markdown-text p {
+    margin-bottom: 20px;
+  }
+</style>
