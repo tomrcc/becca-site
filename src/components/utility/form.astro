@@ -1,0 +1,148 @@
+---
+import TextInput from "./form-parts/text-input.astro";
+import TextAreaInput from "./form-parts/text-area-input.astro";
+import SelectInput from "./form-parts/select-input.astro";
+import RadioInput from "./form-parts/radio-input.astro";
+
+interface Props {
+  form: [
+    {
+      label: string;
+      color: string;
+      type: string;
+      name: string;
+      width: string;
+      values: [{ value: string; label: string }];
+    },
+  ];
+  button: {
+    background_color: string;
+    text_color: string;
+    text_content: string;
+    link_url: string;
+  };
+}
+const { form, button } = Astro.props;
+---
+
+<form method="post" action="/success/" id="contact-form">
+  {
+    form?.map((form_item) => {
+      return form_item.type === "text" ? (
+        <TextInput
+          name={form_item.name}
+          label={form_item.label}
+          color={form_item.color}
+          width={form_item.width}
+        />
+      ) : form_item.type === "textarea" ? (
+        <TextAreaInput
+          name={form_item.name}
+          label={form_item.label}
+          color={form_item.color}
+          width={form_item.width}
+        />
+      ) : form_item.type === "select" ? (
+        <SelectInput
+          name={form_item.name}
+          label={form_item.label}
+          color={form_item.color}
+          values={form_item.values}
+          width={form_item.width}
+        />
+      ) : form_item.type === "radio" ? (
+        <RadioInput
+          name={form_item.name}
+          label={form_item.label}
+          color={form_item.color}
+          values={form_item.values}
+          width={form_item.width}
+        />
+      ) : null;
+    })
+  }
+  <input type="hidden" name="inbox_key" value="bakery" />
+  <input type="text" name="_gotcha" style="display: none;" />
+  <input
+    style={`background-color: ${button.background_color};`}
+    class="form-button"
+    type="submit"
+    value="Send Message"
+  />
+</form>
+<script
+  is:inline
+  src="https://www.google.com/recaptcha/api.js?render=SITE_ID_HERE"></script>
+<script is:inline>
+  var submitted = false;
+  var tokenCreated = false;
+  var formEl = document.getElementById("contact-form");
+
+  formEl.addEventListener("submit", function (event) {
+    // Check if the recaptcha exists
+    if (!tokenCreated) {
+      // Prevent submission
+      event.preventDefault();
+
+      // Prevent more than one submission
+      if (!submitted) {
+        submitted = true;
+        // needs for recaptacha ready
+        grecaptcha.ready(function () {
+          // do request for recaptcha token
+          // response is promise with passed token
+          grecaptcha
+            .execute("SITE_ID_HERE", {
+              action: "create_comment",
+            })
+            .then(function (token) {
+              // add token to form
+              var input = document.createElement("input");
+              input.type = "hidden";
+              input.name = "g-recaptcha-response";
+              input.value = token;
+              formEl.appendChild(input);
+
+              // resubmit the form
+              tokenCreated = true;
+              formEl.submit();
+            });
+        });
+      }
+    }
+  });
+</script>
+
+<style>
+  #contact-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media only screen and (min-width: 650px) {
+    #contact-form {
+      width: 45%;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    #contact-form {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  input,
+  textarea {
+    border: 1px solid #f1f1f1;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: black;
+  }
+  .text-input-group label {
+    line-break: anywhere;
+  }
+  .form-button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+</style>

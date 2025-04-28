@@ -1,0 +1,24 @@
+---
+interface Props {
+  name: string;
+  color: string;
+  label: string;
+  width: string;
+}
+
+const { name, color, label, width } = Astro.props;
+const span = width === "full" ? "span 2" : "span 1";
+---
+
+<div class="text-input-group" style={`grid-column: ${span};`}>
+  <label for={name} style={`color: ${color}`}>
+    {label}
+  </label>
+  <input type="text" id={name} name={name} />
+</div>
+
+<style>
+  input {
+    width: 100%;
+  }
+</style>

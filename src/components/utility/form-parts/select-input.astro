@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  color: string;
+  label: string;
+  width: string;
+  values: [{ value: string; label: string }];
+}
+
+const { name, label, color, width, values } = Astro.props;
+const span = width === "full" ? "span 2" : "span 1";
+---
+
+<div class="select-input" style={`grid-column: ${span};`}>
+  <label for={name} style={`color: ${color}`}>{label}</label>
+  <select name={name} id={name}>
+    {
+      values?.map(({ value, label }) => {
+        return <option value={value}>{label}</option>;
+      })
+    }
+  </select>
+</div>
+
+<style>
+  select {
+    width: 100%;
+  }
+</style>

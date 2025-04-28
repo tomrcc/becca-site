@@ -384,31 +384,31 @@ content_blocks:
     heading:
       heading_text: Contact Becca
       heading_color: "#272D2D"
+    image:
+      image_path: /src/assets/images/becca-reach.jpg
+      alt_text: Becca in a yoga pose reaching towards the sky with one arm.
     form:
       - label: First Name
         color: "#272D2D"
         name: name
         type: text
         width: half
-        radio_options: []
       - label: Last Name
         color: "#272D2D"
         name: name
         type: text
         width: half
-        radio_options: []
       - label: Email
         color: "#272D2D"
         name: email
         type: text
         width: half
-        radio_options: []
       - label: Sign up/Interested in
         color: "#272D2D"
         name: interested-in
-        type: radio
+        type: select
         width: half
-        radio_options:
+        values:
           - label: General
             value: General Enquiry
           - label: Wholesale
@@ -418,15 +418,15 @@ content_blocks:
         name: how-did-you-hear
         type: text
         width: full
-        radio_options: []
       - label: Message
         color: "#272D2D"
         name: message
         type: textarea
         width: full
-        radio_options: []
+        values: []
     button:
-      background_color: "#334154"
-      text_color: "#ffffff"
-      button_text: Send
+      background_color: '#B77763'
+      text_color: '#F9EEDE'
+      link: '#contact'
+      button_text: Start free trial
 ---

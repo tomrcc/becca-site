@@ -9,47 +9,54 @@ spec:
 
 # Defines the structure of this component, as well as the default values
 blueprint:
+  background_color: '#F9EEDE'
   heading:
-    heading_text: Contact Us
-    heading_color: '#ffffff'
-  subheading:
-    subheading_text: Get in touch to order bread, enquire about wholesale, or ask us a question!
-    subheading_color: '#ffffff'
-  contact_details:
-    - label: Address
-      color: '#FFFFFF'
-      icon: LocationPin
-      text: >-
-        [123 Bakery Street](/where/#map)
-    - label: Email
-      color: '#FFFFFF'
-      icon: Envelope
-      text: botybakery@gmail.com
+    heading_text: 
+    heading_color: "#272D2D"
+  image:
+    image_path: /src/assets/images/becca-reach.jpg
+    alt_text: 
   form:
-    - label: Email Address
-      color: '#FFFFFF'
-      name: email
-      type: text
-      radio_options: []
-    - label: Name
-      color: '#FFFFFF'
+    - label: First Name
+      color: "#272D2D"
       name: name
       type: text
-      radio_options: []
-    - label: Message
-      color: '#FFFFFF'
-      name: message
-      type: textarea
-      radio_options: []
-    - label: Type of Enquiry
-      color: '#FFFFFF'
-      name: subject
-      type: radio
-      radio_options:
+      width: half
+    - label: Last Name
+      color: "#272D2D"
+      name: name
+      type: text
+      width: half
+    - label: Email
+      color: "#272D2D"
+      name: email
+      type: text
+      width: half
+    - label: Sign up/Interested in
+      color: "#272D2D"
+      name: interested-in
+      type: select
+      width: half
+      values:
         - label: General
           value: General Enquiry
         - label: Wholesale
           value: Wholesale Enquiry
+    - label: How did you hear about Hihi yoga?
+      color: "#272D2D"
+      name: how-did-you-hear
+      type: text
+      width: full
+    - label: Message
+      color: "#272D2D"
+      name: message
+      type: textarea
+      width: full
+  button:
+    background_color: '#B77763'
+    text_color: '#F9EEDE'
+    link: '#contact'
+    button_text: Start free trial
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
@@ -63,4 +70,111 @@ _inputs:
   form:
     type: array
     options:
-      structures: _structures.form
+      structures: _structures.form_inputs
+
+_structures:
+  form_inputs:
+    values:
+      - label: Text Input
+        value:
+          label:
+          color:
+          name:
+          type: 
+        preview:
+          icon: text
+          text:
+            - key: label
+            - Select Input
+          subtext:
+            - key: type
+            - Update select input options.
+        _inputs:
+          label:
+            type: text
+            comment: The label for the input.
+          name:
+            type: text
+            comment: The field name assigned to the data from this input. This will be used in the message you receive from the form submission.
+          type:
+            type: select
+            options:
+              values:
+                - text
+                - textarea
+      - label: Select Input
+        value:
+          label:
+          color:
+          name:
+          type: select
+          values: []
+        preview:
+          icon: check_box
+          text:
+            - key: label
+            - Select Input
+          subtext:
+            - key: type
+            - Update select input options.
+        _inputs:
+          label:
+            type: text
+            comment: The label for the input.
+          name:
+            type: text
+            comment: The field name assigned to the data from this input. This will be used in the message you receive from the form submission.
+          type:
+            hidden: true
+          values:
+            type: array
+            options:
+              structures: _structures.select_values
+      - label: Radio Input
+        value:
+          label:
+          color:
+          name:
+          type: radio
+          values: []
+        preview:
+          icon: check_box
+          text:
+            - key: label
+            - Radio Input
+          subtext:
+            - key: type
+            - Update radio input options.
+        _inputs:
+          label:
+            type: text
+            comment: The label for the input.
+          name:
+            type: text
+            comment: The field name assigned to the data from this input. This will be used in the message you receive from the form submission.
+          type:
+            hidden: true
+          values:
+            type: array
+            options:
+              structures: _structures.select_values
+  select_values:
+    values:
+      - value:
+          label:
+          value:
+        preview:
+          icon: check_box
+          text:
+            - key: label
+            - Selectable Option
+          subtext:
+            - key: value
+            - Update option label and value.
+        _inputs:
+          label:
+            type: text
+            comment: The label for the option.
+          value:
+            type: text
+            comment: The name assigned to the data from this input. This will be used in the message you receive from the form submission.

@@ -1,0 +1,41 @@
+---
+interface Props {
+  name: string;
+  color: string;
+  label: string;
+  width: string;
+  values: [{ value: string; label: string }];
+}
+
+const { color, label, values, name, width } = Astro.props;
+const span = width === "full" ? "span 2" : "span 1";
+---
+
+<div class="check-input-group" style={`grid-column: ${span};`}>
+  <label style={`color: ${color};`}>{label}</label>
+  <div>
+    {
+      values?.map((option: { value?: string; label?: string }) => {
+        return (
+          <div>
+            <input
+              type="radio"
+              id={option.label}
+              name={name}
+              value={option.value}
+            />
+            <label style={`color: ${color};`} for={option.label}>
+              {option.label}
+            </label>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  input {
+    width: 100%;
+  }
+</style>
