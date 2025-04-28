@@ -10,7 +10,7 @@ const { name, color, label, width } = Astro.props;
 const span = width === "full" ? "span 2" : "span 1";
 ---
 
-<div class="text-input-group" style={`grid-column: ${span};`}>
+<div class="text-input" style={`grid-column: ${span};`}>
   <label for={name} style={`color: ${color}`}>
     {label}
   </label>
@@ -20,5 +20,8 @@ const span = width === "full" ? "span 2" : "span 1";
 <style>
   input {
     width: 100%;
+  }
+  .text-input {
+    margin-bottom: 1rem;
   }
 </style>

@@ -11,7 +11,7 @@ const { color, label, values, name, width } = Astro.props;
 const span = width === "full" ? "span 2" : "span 1";
 ---
 
-<div class="check-input-group" style={`grid-column: ${span};`}>
+<div class="radio-input" style={`grid-column: ${span};`}>
   <label style={`color: ${color};`}>{label}</label>
   <div>
     {
@@ -35,6 +35,9 @@ const span = width === "full" ? "span 2" : "span 1";
 </div>
 
 <style>
+  .radio-input {
+    margin-bottom: 1rem;
+  }
   input {
     width: 100%;
   }
