@@ -246,6 +246,24 @@ _inputs:
     comment:
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
+  background_filters:
+    type: object
+    comment: Set brightness and blur filters over the background video to make the text content more legible.
+    options:
+      preview:
+        icon: exposure
+  brightness:
+    type: range
+    options:
+      min: 0
+      max: 2
+      step: 0.025
+  blur:
+    type: range
+    options:
+      min: 0
+      max: 10
+      step: 0.25
 
 _snippets_imports:
   mdx: true

@@ -11,9 +11,13 @@ interface Props {
     image_path: string;
     alt_text: string;
   };
+  background_filters: {
+    brightness: number;
+    blur: number;
+  };
 }
 
-const { heading, background_image } = Astro.props;
+const { heading, background_image, background_filters } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
   { eager: true }
@@ -27,7 +31,21 @@ const imageSrc =
     <h1 style={`color: ${heading.text_color};`}>
       {heading.heading_text}
     </h1>
-    {imageSrc ? <Image alt={background_image.alt_text} src={imageSrc} /> : ""}
+    {
+      imageSrc ? (
+        <div
+          class="hero-bg-image-filter"
+          style={`backdrop-filter: brightness(${background_filters.brightness}) blur(${background_filters.blur}px);`}>    
+        </div>
+        <Image
+          class="hero-bg-image"
+          alt={background_image.alt_text}
+          src={imageSrc}
+        />
+      ) : (
+        ""
+      )
+    }
   </div>
 </section>
 <style>
@@ -43,7 +61,9 @@ const imageSrc =
     padding-block: 40px;
     display: flex;
   }
-  .hero-container img {
+
+  .hero-bg-image,
+  .hero-bg-image-filter {
     position: absolute;
     left: 0;
     top: calc(var(--headerCalcHeight) * -1);
@@ -52,6 +72,10 @@ const imageSrc =
     max-height: 720px;
     object-fit: cover;
   }
+  .hero-bg-image-filter {
+    z-index: 1;
+  }
+
   .hero-container h1 {
     position: relative;
     z-index: 99;

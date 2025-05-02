@@ -16,6 +16,9 @@ content_blocks:
     background_image:
       image_path: /src/assets/images/becca-long-grass.jpeg
       alt_text: Becca amongst long grass, balancing on her side on one arm and a leg, with the other arm raised towards the sky.
+    background_filters:
+      brightness: 0.3
+      blur: 0
   - _bookshop_name: text-under-image
     background_color: '#F9EEDE'
     image:
