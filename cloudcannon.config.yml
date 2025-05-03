@@ -256,8 +256,8 @@ _inputs:
     type: range
     options:
       min: 0
-      max: 2
-      step: 0.025
+      max: 100
+      step: 1
   blur:
     type: range
     options:

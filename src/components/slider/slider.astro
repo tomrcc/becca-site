@@ -8,6 +8,16 @@ interface Props {
     image_path: string;
     alt_text: string;
   };
+  background_filters: {
+    brightness: number;
+    blur: number;
+    background_gradient: {
+      gradient_enabled: boolean;
+      gradient_direction: string;
+      gradient_color: string;
+      gradient_transparency: number;
+    };
+  };
   heading: {
     heading_text: string;
     text_color: string;
@@ -20,7 +30,7 @@ interface Props {
     },
   ];
 }
-const { background_image, heading, slides } = Astro.props;
+const { background_image, heading, slides, background_filters } = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/**/*.{jpeg,jpg,png,gif}",
@@ -28,11 +38,16 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 const imageSrc =
   images[background_image.image_path]?.default ?? background_image.image_path;
+
+const opacityDecimal =
+  1 - 1 / (100 / background_filters.background_gradient.gradient_transparency);
 ---
 
 <div class="swiper-body">
   <div class="swiper-container">
-    <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
+    <h2 class="swiper-heading" style={`color: ${heading.text_color};`}>
+      {heading.heading_text}
+    </h2>
     <div class="swiper">
       <div class="swiper-wrapper">
         {
@@ -57,7 +72,20 @@ const imageSrc =
   {
     imageSrc ? (
       <div class="background-image">
+        <div
+          class="background-image-filter-grad"
+          style={
+            background_filters.background_gradient.gradient_enabled
+              ? `opacity: ${opacityDecimal}; background-color: ${background_filters.background_gradient.gradient_color}; mask-image: linear-background_gradient(to ${background_filters.background_gradient.gradient_direction},  transparent 33%,  ${background_filters.background_gradient.gradient_color} 66%);`
+              : ""
+          }
+        />
+        <div
+          class="background-image-filter"
+          style={`backdrop-filter: brightness(${background_filters.brightness}%) blur(${background_filters.blur}px);`}
+        />
         <Image
+          class="background-image-image"
           alt={background_image.alt_text}
           src={imageSrc}
           widths={[640, 2000]}
@@ -73,12 +101,22 @@ const imageSrc =
     .swiper-body {
       position: relative;
       overflow-y: hidden;
-      padding-block: 96px;
       --swiper-navigation-top-offset: 95%;
     }
+
     .swiper-container {
+      position: relative;
+      padding-block: 70px;
+      height: 100%;
+      z-index: 3;
       max-width: var(--pageContainer);
       margin: 0 auto;
+    }
+    .swiper {
+      padding-block: 96px;
+    }
+    .swiper-heading {
+      padding-inline: var(--pagePadding);
     }
     .swiper-button-prev:after,
     .swiper-rtl .swiper-button-next::after,
@@ -101,12 +139,20 @@ const imageSrc =
     .swiper-rtl .swiper-button-next::after {
       background-image: url("/icons/pagination-prev.svg");
     }
-    .background-image img {
+    .background-image-filter-grad,
+    .background-image-filter,
+    .background-image-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+    }
+    .background-image-filter {
+      z-index: 1;
+    }
+    .background-image-filter-grad {
+      z-index: 2;
     }
     .swiper-slide {
       padding-inline: 48px;
@@ -123,8 +169,13 @@ const imageSrc =
 
     @media screen and (min-width: 768px) {
       .swiper-body {
-        padding-block: 300px;
         --swiper-navigation-top-offset: 50%;
+      }
+      .swiper {
+        padding-block: 300px;
+      }
+      .swiper-heading {
+        font-size: 1.5rem;
       }
       .swiper-button-prev:after,
       .swiper-rtl .swiper-button-next::after,

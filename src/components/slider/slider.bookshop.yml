@@ -24,6 +24,14 @@ blueprint:
   background_image:
     image_path: /src/assets/images/jade-stephens-unsplash.jpeg
     alt_text: Jade Stephens Unsplash - Clouds over a sea
+  background_filters:
+    brightness: 80
+    blur: 0
+    background_gradient:
+      gradient_enabled: false
+      gradient_direction: bottom
+      gradient_color: '#000000'
+      gradient_transparency: 50
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:

@@ -327,6 +327,14 @@ content_blocks:
     background_image:
       image_path: /src/assets/images/jade-stephens-unsplash.jpeg
       alt_text: Jade Stephens Unsplash - Clouds over a sea
+    background_filters:
+      brightness: 60
+      blur: 0
+      background_gradient:
+        gradient_enabled: false
+        gradient_direction: bottom
+        gradient_color: '#000000'
+        gradient_transparency: 50
   - _bookshop_name: card-grid
     background_color: '#F9EEDE'
     heading:
