@@ -2,10 +2,12 @@
 spec:
   structures:
     - content_blocks
-  label: slider
+  label: Slider
   description: 
-  icon: 'space_dashboard'
-  tags: []
+  icon: 'swipe'
+  tags:
+    - Text slider
+    - Background image
 
 # Defines the structure of this component, as well as the default values
 blueprint:

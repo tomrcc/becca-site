@@ -84,7 +84,6 @@ _editables:
     indent: true
     numberedlist: true
     outdent: true
-    code: true
     embed: true
     horizontalrule: true
     image: true
@@ -116,11 +115,7 @@ _inputs:
       link: true
       bulletedlist: true
       numberedlist: true
-      table: true
-      code: true
-      embed: true
       horizontalrule: true
-      image: true
       undo: true
       redo: true
       removeformat: true
@@ -149,6 +144,9 @@ _inputs:
       preview:
         text:
           - key: name
+        icon: palette
+        icon_color: 
+          - key: value
   text_color:
     type: select
     options:
@@ -157,6 +155,9 @@ _inputs:
       preview:
         text:
           - key: name
+        icon: palette
+        icon_color: 
+          - key: value
   color:
     type: select
     options:
@@ -165,6 +166,9 @@ _inputs:
       preview:
         text:
           - key: name
+        icon: palette
+        icon_color: 
+          - key: value
   icon:
     type: select
     options:

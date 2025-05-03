@@ -2,16 +2,97 @@
 spec:
   structures:
     - content_blocks
-  label: card-grid
+  label: Card Grid
   description: 
-  icon: 'space_dashboard'
-  tags: []
+  icon: apps
+  tags:
+    - Text
+    - Buttons
 
 # Defines the structure of this component, as well as the default values
 blueprint:
+  background_color: 
+  heading:
+    heading_text: 
+    text_color: '#272D2D'
+  cards:
+    - heading: 
+        heading_text: Monthly Membership
+        background_color: '#B77763'
+        text_color: '#F9EEDE'
+        subheading_text:
+      background_color: '#F9EEDE'
+      text_color: '#272D2D'
+      card_content_sections: []
+      button:
+        background_color: '#B77763'
+        text_color: '#F9EEDE'
+        link: '#contact'
+        button_text: Start free trial
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
 
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
+  cards:
+    type: array
+    options:
+      structures: _structures.cards
+
+_structures:
+  cards:
+    values:
+      - value:
+          heading: 
+            heading_text: 
+            background_color: '#B77763'
+            text_color: '#F9EEDE'
+            subheading_text:
+          background_color: '#F9EEDE'
+          text_color: '#272D2D'
+          card_content_sections: []
+          button:
+            background_color: '#B77763'
+            text_color: '#F9EEDE'
+            link: '#contact'
+            button_text: Contact
+        _inputs:
+          card_content_sections:
+            type: array
+            comment: Add separated sections of content to this card, each with independent font size.
+            options:
+              structures: _structures.card_content_sections
+        _structures:
+          card_content_sections:
+            values:
+              - value:
+                  card_section_heading:
+                  card_section_content:
+                  font_size:
+                _inputs:
+                  font_size:
+                    type: range
+                    options:
+                      min: 0.8
+                      max: 2
+                      step: 0.01
+                  card_section_content:
+                    type: markdown
+                    options:
+                      blockquote: true
+                      bold: true
+                      format: p h3 h4
+                      italic: true
+                      strike: true
+                      subscript: true
+                      superscript: true
+                      underline: true
+                      link: true
+                      bulletedlist: true
+                      numberedlist: true
+                      horizontalrule: true
+                      undo: true
+                      redo: true
+                      removeformat: true
+                      copyformatting: true

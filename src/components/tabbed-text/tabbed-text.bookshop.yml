@@ -12,30 +12,45 @@ spec:
 blueprint:
   background_color: '#ffffff'
   heading:
-    heading_text: Keep what you need. Delete the rest.
+    heading_text: 
     text_color: '#393939'
   tab_headings:
     tab_headings_text_color: '#393939'
     tab_subheadings_text_content: Read more
     tab_subheadings_text_color: '#272D2D80'
-  tabs:
-    - tab_heading: About
-      text_content: >-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-        est laborum.
-      text_color: '#272D2D'
-      background_color: '#ffffff'
+  tabs: []
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
 
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
+  tabs:
+    type: array
+    options:
+      structures: _structures.tab_contents
+  tab_headings_text_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+  tab_subheadings_text_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
   heading:
     options:
       preview:
@@ -46,3 +61,12 @@ _inputs:
         subtext:
           - key: heading_gradient_color
           - 'Update heading gradient color and text content.'
+
+_structures:
+  tab_contents:
+    values:
+      - value:
+          tab_heading: 
+          text_content:
+          text_color: '#272D2D'
+          background_color: '#ffffff'
