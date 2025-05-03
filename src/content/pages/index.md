@@ -17,8 +17,13 @@ content_blocks:
       image_path: /src/assets/images/becca-long-grass.jpeg
       alt_text: Becca amongst long grass, balancing on her side on one arm and a leg, with the other arm raised towards the sky.
     background_filters:
-      brightness: 0.3
+      brightness: 80
       blur: 0
+      background_gradient:
+        gradient_enabled: true
+        gradient_direction: bottom
+        gradient_color: '#000000'
+        gradient_transparency: 60
   - _bookshop_name: text-under-image
     background_color: '#F9EEDE'
     image:
@@ -43,6 +48,14 @@ content_blocks:
     background_image:
       image_path: /src/assets/images/becca-cross-legged.jpeg
       alt_text: Becca sitting cross legged on some grass.
+    background_filters:
+      brightness: 80
+      blur: 0
+      background_gradient:
+        gradient_enabled: false
+        gradient_direction: bottom
+        gradient_color: '#000000'
+        gradient_transparency: 50
     text:
       text_content: >-
         Connect with your teacher, Becca Huxley, to gain personalised guidance and support for your unique practice. Join the Hihi Yoga online studio to become a part of a supportive like-minded community, follow along for tips and inspiration to help you stay accountable, wherever you are in the world. 

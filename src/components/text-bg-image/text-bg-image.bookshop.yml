@@ -15,6 +15,14 @@ blueprint:
   background_image:
     image_path: 
     alt_text: 
+  background_filters:
+    brightness: 80
+    blur: 0
+    background_gradient:
+      gradient_enabled: true
+      gradient_direction: bottom
+      gradient_color: '#000000'
+      gradient_transparency: 60
   text:
     text_content: 
     text_color: '#a0a2ff'

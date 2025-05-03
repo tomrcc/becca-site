@@ -4,42 +4,68 @@ import { Image } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
-  text: {
-    text_content: string;
-    text_color: string;
-  };
-  background_image: {
-    image_path: string;
-    alt_text: string;
-  };
-  buttons: [
-    {
-      _bookshop_name: string;
-      text: string;
-      icon: string;
-      link: string;
-      background_color?: string;
-      hover_brightness: number;
-      text_color: string;
-    },
-  ];
+	text: {
+		text_content: string;
+		text_color: string;
+	};
+	background_image: {
+		image_path: string;
+		alt_text: string;
+	};
+	background_filters: {
+		brightness: number;
+		blur: number;
+		background_gradient: {
+			gradient_enabled: boolean;
+			gradient_direction: string;
+			gradient_color: string;
+			gradient_transparency: number;
+		};
+	};
+	buttons: [
+		{
+			_bookshop_name: string;
+			text: string;
+			icon: string;
+			link: string;
+			background_color?: string;
+			hover_brightness: number;
+			text_color: string;
+		},
+	];
 }
 
-const { text, background_image, buttons } = Astro.props;
+const { text, background_image, buttons, background_filters } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/**/*.{jpeg,jpg,png,gif}",
-  { eager: true }
+	"/src/assets/**/*.{jpeg,jpg,png,gif}",
+	{ eager: true },
 );
 const imageSrc =
-  images[background_image.image_path]?.default ?? background_image.image_path;
+	images[background_image.image_path]?.default ?? background_image.image_path;
 const allButtons = import.meta.glob("/src/components/buttons/**/*.astro", {
-  eager: true,
+	eager: true,
 });
+const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gradient_transparency));
 ---
 
 <section class="text-bg-image">
   <div class="text-bg-image-container">
-    {imageSrc ? <Image alt={background_image.alt_text} src={imageSrc} /> : ""}
+    {
+      imageSrc ? (
+        <div
+          class="text-bg-image-filter-grad"
+          style={background_filters.background_gradient.gradient_enabled ? 
+            `opacity: ${opacityDecimal}; background-color: ${background_filters.background_gradient.gradient_color}; mask-image: linear-gradient(to ${background_filters.background_gradient.gradient_direction},  transparent 33%,  ${background_filters.background_gradient.gradient_color} 66%);`
+            : ''}>    
+        </div>
+        <div
+          class="text-bg-image-filter"
+          style={`backdrop-filter: brightness(${background_filters.brightness}%) blur(${background_filters.blur}px);`}>    
+        </div>
+        <Image class="text-bg-image-image" alt={background_image.alt_text} src={imageSrc} /> 
+      ) : ""
+    }
+    
     <div class="markdown-text" style={`color: ${text.text_color};`}>
       <Markdown content={text.text_content} />
     </div>
@@ -80,12 +106,21 @@ const allButtons = import.meta.glob("/src/components/buttons/**/*.astro", {
     position: relative;
     z-index: 9;
   }
-  .text-bg-image-container img {
+  .text-bg-image-filter,
+  .text-bg-image-filter-grad,
+  .text-bg-image-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+  .text-bg-image-filter {
+    z-index: 1;
+  }
+  .text-bg-image-filter-grad {
+    z-index: 2;
   }
   .text-bg-image-container .buttons {
     position: relative;

@@ -264,6 +264,29 @@ _inputs:
       min: 0
       max: 10
       step: 0.25
+  background_gradient:
+    type: object
+    comment: A color gradient overlaying the background image. Select color as transparent to remove the color gradient.
+    options:
+      preview:
+        icon: gradient
+  gradient_enabled:
+    type: switch
+    comment: Enable a color gradient over the background image. Useful for adding a light to dark gradient.
+  gradient_transparency:
+    type: range
+    comment: Control how far transparent the gradient filter is over the background image. Set this low to have a more pronounced color gradient over the image.
+    options:
+      min: 0
+      max: 100
+      step: 1
+  gradient_direction:
+    type: select
+    comment: The direction of the color gradient.
+    options:
+      values:
+        - top
+        - bottom
 
 _snippets_imports:
   mdx: true

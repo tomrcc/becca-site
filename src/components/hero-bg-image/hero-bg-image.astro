@@ -3,27 +3,36 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface Props {
-  heading: {
-    heading_text: string;
-    text_color: string;
-  };
-  background_image: {
-    image_path: string;
-    alt_text: string;
-  };
-  background_filters: {
-    brightness: number;
-    blur: number;
-  };
+	heading: {
+		heading_text: string;
+		text_color: string;
+	};
+	background_image: {
+		image_path: string;
+		alt_text: string;
+	};
+	background_filters: {
+		brightness: number;
+		blur: number;
+		background_gradient: {
+			gradient_enabled: boolean;
+			gradient_direction: string;
+			gradient_color: string;
+      gradient_transparency: number;
+		};
+	};
 }
 
 const { heading, background_image, background_filters } = Astro.props;
+
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/**/*.{jpeg,jpg,png,gif}",
-  { eager: true }
+	"/src/assets/**/*.{jpeg,jpg,png,gif}",
+	{ eager: true },
 );
 const imageSrc =
-  images[background_image.image_path]?.default ?? background_image.image_path;
+	images[background_image.image_path]?.default ?? background_image.image_path;
+
+const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gradient_transparency));
 ---
 
 <section class="hero">
@@ -34,8 +43,14 @@ const imageSrc =
     {
       imageSrc ? (
         <div
+          class="hero-bg-image-filter-grad"
+          style={background_filters.background_gradient.gradient_enabled ? 
+            `opacity: ${opacityDecimal}; background-color: ${background_filters.background_gradient.gradient_color}; mask-image: linear-background_gradient(to ${background_filters.background_gradient.gradient_direction},  transparent 33%,  ${background_filters.background_gradient.gradient_color} 66%);`
+            : ''}>    
+        </div>
+        <div
           class="hero-bg-image-filter"
-          style={`backdrop-filter: brightness(${background_filters.brightness}) blur(${background_filters.blur}px);`}>    
+          style={`backdrop-filter: brightness(${background_filters.brightness}%) blur(${background_filters.blur}px);`}>    
         </div>
         <Image
           class="hero-bg-image"
@@ -48,6 +63,7 @@ const imageSrc =
     }
   </div>
 </section>
+
 <style>
   .hero {
     position: relative;
@@ -61,9 +77,9 @@ const imageSrc =
     padding-block: 40px;
     display: flex;
   }
-
   .hero-bg-image,
-  .hero-bg-image-filter {
+  .hero-bg-image-filter,
+  .hero-bg-image-filter-grad {
     position: absolute;
     left: 0;
     top: calc(var(--headerCalcHeight) * -1);
@@ -72,8 +88,12 @@ const imageSrc =
     max-height: 720px;
     object-fit: cover;
   }
+
   .hero-bg-image-filter {
     z-index: 1;
+  }
+  .hero-bg-image-filter-grad {
+    z-index: 2;
   }
 
   .hero-container h1 {
