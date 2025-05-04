@@ -36,6 +36,20 @@ preview:
 
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
+  tabs:
+    type: array
+    options:
+      structures: _structures.bg_image_tabs
+  mobile_styles:
+    type: object
+    options:
+      preview:
+        icon: palette
+  desktop_tab_styles:
+    type: object
+    options:
+      preview:
+        icon: palette
   text:
     options:
       preview:
@@ -58,4 +72,70 @@ _inputs:
           - 'Update image'
         image:
           - key: image_path
-    
+  heading_background_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+  heading_text_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+  heading_active_background_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+  heading_active_text_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+  text_background_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+        icon: palette
+        icon_color: 
+          - key: value
+
+_structures:
+  bg_image_tabs:
+    values:
+      - value:
+          image:
+            image_path: 
+            alt_text: 
+          text:
+            text_heading:
+            text_content: 
+            text_color: '#a0a2ff'

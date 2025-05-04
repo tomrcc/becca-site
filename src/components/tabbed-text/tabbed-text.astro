@@ -36,7 +36,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
       <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
       <ul>
         {
-          tabs.map((tab, index) => {
+          tabs?.map((tab, index) => {
             return (
               <li>
                 <button x-on:click={`selectedTab = ${index + 1}`}>
@@ -62,7 +62,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     <!-- The tabs -->
     <ul class="mobile-tabs-list">
       {
-        tabs.map((tab, index) => {
+        tabs?.map((tab, index) => {
           return (
             <li
               class="mobile-tab-content"
@@ -91,7 +91,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
       <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
       <ul>
         {
-          tabs.map((tab, index) => {
+          tabs?.map((tab, index) => {
             return (
               <li>
                 <button x-on:click={`selectedTab = ${index + 1}`}>
@@ -110,7 +110,7 @@ const { background_color, heading, tab_headings, tabs } = Astro.props;
     <!-- The tabs -->
     <ul class="tabs-list">
       {
-        tabs.map((tab, index) => {
+        tabs?.map((tab, index) => {
           return (
             <li
               class="tab-content"
