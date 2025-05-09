@@ -18,11 +18,11 @@ const hover_brightness = block.hover_brightness;
   class="button">
   <a style={`color: ${block.text_color}`} href={block.button_link}>
     {
-      block.button_icon ? (
+      block.button_icon && (
         <span class="button__icon">
           <Icon icon={block.button_icon} />
         </span>
-      ) : null
+      )
     }
     {block.button_text}
   </a>
@@ -40,7 +40,7 @@ const hover_brightness = block.hover_brightness;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1.5rem;
+    padding: 16px 92px;
     font-size: 1rem;
   }
   .button a:hover {

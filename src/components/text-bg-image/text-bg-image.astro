@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
@@ -45,13 +45,14 @@ const imageSrc =
 const allButtons = import.meta.glob("/src/components/buttons/**/*.astro", {
 	eager: true,
 });
-const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gradient_transparency));
+const opacityDecimal =
+	1 - 1 / (100 / background_filters.background_gradient.gradient_transparency);
 ---
 
 <section class="text-bg-image">
   <div class="text-bg-image-container">
     {
-      imageSrc ? (
+      imageSrc && (
         <div
           class="text-bg-image-filter-grad"
           style={background_filters.background_gradient.gradient_enabled ? 
@@ -62,8 +63,16 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
           class="text-bg-image-filter"
           style={`backdrop-filter: brightness(${background_filters.brightness}%) blur(${background_filters.blur}px);`}>    
         </div>
-        <Image class="text-bg-image-image" alt={background_image.alt_text} src={imageSrc} /> 
-      ) : ""
+        <Picture 
+          class="text-bg-image-image" 
+          alt={background_image.alt_text} 
+          src={imageSrc}
+          widths={[600, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600]}
+          sizes="100vw"
+          loading="eager"
+          formats={["avif", "webp"]} 
+        /> 
+      )
     }
     
     <div class="markdown-text" style={`color: ${text.text_color};`}>
@@ -127,11 +136,15 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
     z-index: 9;
     display: flex;
     gap: 1rem;
+    margin-top: 22px;
   }
-
+  
   @media screen and (min-width: 512px) {
     .text-bg-image-container {
       padding-block: 370px;
+    }
+    .text-bg-image-container .buttons {
+      margin-top: 48px;
     }
   }
 </style>

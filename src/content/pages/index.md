@@ -17,13 +17,14 @@ content_blocks:
       image_path: /src/assets/images/becca-long-grass.jpeg
       alt_text: Becca amongst long grass, balancing on her side on one arm and a leg, with the other arm raised towards the sky.
     background_filters:
-      brightness: 80
+      brightness: 100
       blur: 0
       background_gradient:
         gradient_enabled: true
         gradient_direction: bottom
         gradient_color: '#000000'
-        gradient_transparency: 60
+        gradient_transparency: 70
+        gradient_start: 95
   - _bookshop_name: text-under-image
     background_color: '#F9EEDE'
     image:
@@ -74,7 +75,7 @@ content_blocks:
     tab_text_color: '#272D2D'
     heading:
       heading_text: Meet Becca
-      text_color: '#272D2D'
+      text_color: '#ffffff'
     tabs:
       - tab_heading: About
         text_content: >-

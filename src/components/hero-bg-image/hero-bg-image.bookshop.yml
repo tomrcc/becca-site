@@ -25,6 +25,7 @@ blueprint:
       gradient_direction: bottom
       gradient_color: '#000000'
       gradient_transparency: 50
+      gradient_start: 50
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:

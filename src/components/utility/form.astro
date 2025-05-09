@@ -58,7 +58,9 @@ const { form, button } = Astro.props;
           values={form_item.values}
           width={form_item.width}
         />
-      ) : null;
+      ) : (
+        ""
+      );
     })
   }
   <input type="hidden" name="inbox_key" value="bakery" />

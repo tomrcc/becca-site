@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 interface Props {
 	heading: {
@@ -19,6 +19,7 @@ interface Props {
 			gradient_direction: string;
 			gradient_color: string;
       gradient_transparency: number;
+      gradient_start: number;
 		};
 	};
 }
@@ -41,24 +42,26 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
       {heading.heading_text}
     </h1>
     {
-      imageSrc ? (
+      imageSrc && (
         <div
           class="hero-bg-image-filter-grad"
           style={background_filters.background_gradient.gradient_enabled ? 
-            `opacity: ${opacityDecimal}; background-color: ${background_filters.background_gradient.gradient_color}; mask-image: linear-background_gradient(to ${background_filters.background_gradient.gradient_direction},  transparent 33%,  ${background_filters.background_gradient.gradient_color} 66%);`
+            `opacity: ${opacityDecimal}; background-color: ${background_filters.background_gradient.gradient_color}; mask-image: linear-gradient(to ${background_filters.background_gradient.gradient_direction},  ${background_filters.background_gradient.gradient_color}1A,  ${background_filters.background_gradient.gradient_color} ${background_filters.background_gradient.gradient_start}%);`
             : ''}>    
         </div>
         <div
           class="hero-bg-image-filter"
           style={`backdrop-filter: brightness(${background_filters.brightness}%) blur(${background_filters.blur}px);`}>    
         </div>
-        <Image
+        <Picture
           class="hero-bg-image"
           alt={background_image.alt_text}
           src={imageSrc}
+          widths={[600, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600]}
+          sizes="100vw"
+          loading="eager"
+          formats={["avif", "webp"]}
         />
-      ) : (
-        ""
       )
     }
   </div>
@@ -70,7 +73,7 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   }
   .hero-container {
     max-width: var(--pageContainer);
-    height: calc(80vh - var(--headerCalcHeight));
+    min-height: calc(80vh - var(--headerCalcHeight));
     max-height: calc(720px - var(--headerCalcHeight));
     margin-inline: auto;
     padding-inline: var(--pagePadding);
@@ -84,7 +87,7 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
     left: 0;
     top: calc(var(--headerCalcHeight) * -1);
     width: 100%;
-    height: 80vh;
+    min-height: calc(80vh + var(--headerCalcHeight));
     max-height: 720px;
     object-fit: cover;
   }

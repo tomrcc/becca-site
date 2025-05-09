@@ -48,19 +48,15 @@ const { background_color, heading, cards } = Astro.props;
             <div
               class="card"
               style={`border: 1px solid ${cardHeadingBackgroundColor};`}>
-              {card.heading.heading_text ? (
+              {card.heading.heading_text && (
                 <div
                   class="card-heading"
                   style={`background-color: ${cardHeadingBackgroundColor}; color: ${card.heading.text_color};`}>
                   <h3>{card.heading.heading_text}</h3>
-                  {card.heading.subheading_text ? (
+                  {card.heading.subheading_text && (
                     <p>{card.heading.subheading_text}</p>
-                  ) : (
-                    ""
                   )}
                 </div>
-              ) : (
-                ""
               )}
               <div
                 class="card-details"
@@ -78,27 +74,23 @@ const { background_color, heading, cards } = Astro.props;
                           content={content_section.card_section_content}
                         />
                       </div>
-                      {index !== cardContentSections?.length - 1 ? (
+                      {index !== cardContentSections?.length - 1 && (
                         <div
                           class="card-divider"
                           style={`background-color: ${cardHeadingBackgroundColor};`}
                         />
-                      ) : (
-                        ""
                       )}
                     </div>
                   );
                 })}
               </div>
-              {card.button.button_text ? (
+              {card.button.button_text && (
                 <a
                   href={card.button.link}
                   class="card-button"
                   style={`background-color: ${card.button.background_color}; color: ${card.button.text_color};`}>
                   {card.button.button_text}
                 </a>
-              ) : (
-                ""
               )}
             </div>
           );

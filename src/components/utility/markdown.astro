@@ -4,4 +4,8 @@ const md = markdownit({ html: true });
 const { content } = Astro.props;
 ---
 
-<div class="markdown-text" set:html={content ? md.render(content) : ""} />
+{
+  content && (
+    <div class="markdown-text" set:html={content ? md.render(content) : ""} />
+  )
+}

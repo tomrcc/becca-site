@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import Markdown from "../utility/markdown.astro";
 
 interface Props {
@@ -47,11 +47,16 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
       <div class="left-right-tabbed-wrapper">
         <h2 style={`color: ${heading.text_color};`}>{heading.heading_text}</h2>
         <div class="left-right-tabbed-content">
-          <Image
+          <Picture
+            pictureAttributes={{
+              class: "left-right-tabbed-image",
+            }}
             alt={image.alt_text}
-            widths={[320, 500, 640]}
-            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
+            widths={[600, 800, 1200]}
+            sizes="100vw"
+            loading="eager"
+            formats={["avif", "webp"]}
           />
 
           <spicy-sections class="spicy-sections">
@@ -99,9 +104,15 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
     gap: 17px;
   }
 
-  .left-right-tabbed-content img {
+  .left-right-tabbed-image {
     width: 100%;
-    height: auto;
+    max-height: 70vh;
+  }
+  .left-right-tabbed-image img {
+    max-width: 816px;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1.25;
     border-radius: 40px;
   }
   .left-right-tabbed spicy-sections {
@@ -116,11 +127,13 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
   }
   .left-right-tabbed spicy-sections::part(tab-list) {
     overflow-x: scroll;
+    column-gap: 40px;
+    flex-wrap: wrap;
   }
   .left-right-tabbed spicy-sections h3[aria-selected="true"] {
     color: var(--tab_text_color) !important;
   }
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 600px) {
     .left-right-tabbed-wrapper {
       padding-block: 140px;
     }
@@ -132,11 +145,11 @@ const imageSrc = images[image.image_path]?.default ?? image.image_path;
     .left-right-tabbed-content {
       flex-direction: row;
     }
-    .left-right-tabbed-content img {
-      width: 40%;
+    .left-right-tabbed-image {
       max-width: 816px;
-      height: max-content;
-      aspect-ratio: 1 / 1.22;
+      min-width: 50%;
+      height: 100%;
+      max-height: none;
     }
     spicy-sections {
       flex-direction: column;
