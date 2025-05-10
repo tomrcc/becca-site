@@ -1,41 +1,57 @@
 ---
 import { header } from "../../../data/navigation.json";
+import Icon from "../utility/icon";
+
+const backgroundColor = header.background_color;
+const textColor = header.text_color;
+const backgroundColorMobile = header.background_color_mobile;
+const textColorMobile = header.text_color_mobile;
+const hoverTextColor = header.hover_text_color;
+const hoverTextColorMobile = header.hover_text_color_mobile;
 ---
 
-<header
-  class="header"
-  x-data="{ open: false }"
-  x-transition
-  style={`background-color: ${header.background_color}; color: ${header.color};`}>
+<header class="header">
   <div class="header__container">
     <nav class="header__nav">
       <a class="header__logo-link" href={header.logo_url}>
         <img class="header__logo-image" src={header.logo} alt="Logo" />
       </a>
-      <button class="hamburger" @click="open = ! open">
-        <svg height="16" width="24" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <path
-              d="M0 16h24v-2.667H0V16zm0-6.667h24V6.667H0v2.666zM0 0v2.667h24V0H0z"
-              id="a">
-            </path>
-          </defs>
-          <g fill="none" fill-rule="evenodd">
-            <mask fill="#fff" id="b">
-              <use href="#a"> </use>
-            </mask>
-            <use fill="#000" fill-rule="nonzero" href="#a"> </use>
-            <g mask="url(#b)">
-              <path d="M-4-8h32v32H-4z" fill="#034AD8"> </path>
-            </g>
-          </g>
-        </svg>
+
+      <!-- Mobile menu -->
+      <button
+        class="hamburger-icon"
+        popovertarget="mobile-menu"
+        popovertargetaction="show">
+        <Icon icon="Bars" />
       </button>
+      <div popover id="mobile-menu" class="mobileMenuPopover">
+        <button
+          class="close-menu-icon"
+          popovertarget="mobile-menu"
+          popovertargetaction="hide">
+          <Icon icon="Close" />
+        </button>
+        <ul
+          class="header__nav-links-mobile"
+          aria-label="Header navigation links">
+          {
+            header.links.map((link) => {
+              return (
+                <li class="header__nav-item">
+                  <a class="header__nav-link" href={link.link}>
+                    {link.text}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <!-- Desktop header links -->
       <ul
-        class="header__nav-links"
-        x-show="open"
-        x-transition
-        @click.outside="open = false">
+        class="header__nav-links-desktop"
+        aria-label="Header navigation links">
         {
           header.links.map((link) => {
             return (
@@ -52,13 +68,25 @@ import { header } from "../../../data/navigation.json";
   </div>
 </header>
 
-<style>
-  .header__container {
-    max-width: var(--pageContainer);
-    padding-inline: var(--pagePadding);
-    margin: 0 auto;
+<style
+  define:vars={{
+    backgroundColor,
+    textColor,
+    backgroundColorMobile,
+    textColorMobile,
+    hoverTextColor,
+    hoverTextColorMobile,
+  }}
+>
+  .header {
+    background-color: var(--backgroundColorMobile);
+    color: var(--textColorMobile);
     position: relative;
     z-index: 99;
+  }
+  .header__container {
+    max-width: var(--pageContainer);
+    margin: 0 auto;
   }
   .header li {
     list-style-type: none;
@@ -66,6 +94,41 @@ import { header } from "../../../data/navigation.json";
   .header__logo-image {
     height: var(--headerLogoHeight);
     width: auto;
+    margin-left: var(--pagePadding);
+  }
+  .hamburger-icon,
+  .close-menu-icon {
+    position: relative;
+    width: clamp(1rem, 4vw, 2rem);
+    margin-right: var(--pagePadding);
+  }
+  .close-menu-icon {
+    align-self: end;
+    justify-self: end;
+  }
+  .mobileMenuPopover {
+    /* Closed state transformed off the screen */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100vh);
+    transition:
+      transform 0.4s,
+      overlay 0.4s ease-out;
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--pagePadding);
+    padding-block: 54px;
+    width: 100vw;
+    inset: unset;
+    height: fit-content;
+    background-color: var(--backgroundColorMobile);
+    color: var(--textColorMobile);
+  }
+
+  /* Styles while the menu is open */
+  .mobileMenuPopover:popover-open {
+    transform: translateY(0);
   }
 
   .header__nav {
@@ -74,60 +137,50 @@ import { header } from "../../../data/navigation.json";
     align-items: center;
     padding-block: 1rem;
   }
-
-  .header__nav-links {
-    position: absolute;
-    z-index: 99;
-    background-color: white;
-    right: 0;
-    bottom: 0;
-    top: 5rem;
-    left: 0;
+  .header__nav-links-desktop {
+    display: none;
+  }
+  .header__nav-links-mobile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 50px;
     padding: 1rem;
+    font-size: clamp(1rem, 4vw, 2rem);
   }
   .header__nav-link {
     cursor: pointer;
   }
-  .header__nav-link:hover {
-    color: #034ad8;
+  .header__nav-links-mobile .header__nav-link:hover {
+    color: var(--hoverTextColorMobile);
   }
-
-  @media screen and (min-width: 600px) {
-    .header__nav-links {
+  @media screen and (min-width: 900px) {
+    .header {
+      background-color: var(--backgroundColor);
+      color: var(--textColor);
+    }
+    .header__nav-links-mobile,
+    .hamburger-icon,
+    .mobileMenuPopover,
+    .close-menu-icon {
+      display: none;
+    }
+    .header__nav-links-desktop {
       position: static;
+      margin-inline: var(--pagePadding);
       display: flex !important;
       flex-direction: row;
       justify-content: flex-end;
       padding: 0;
-      min-width: none;
-      background-color: transparent;
     }
-  }
-
-  @media screen and (min-width: 600px) {
     .header__nav-item {
-      padding-left: 1rem;
+      padding-left: 2.5rem;
     }
-  }
-
-  .hamburger {
-    padding: 0.5rem;
-    transform: translateX(0.5rem);
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .hamburger:hover {
-    background-color: #e5ecfb;
-  }
-
-  @media screen and (min-width: 600px) {
-    .hamburger {
-      display: none;
+    .header__nav-links-desktop .header__nav-link {
+      font-family: "Inter", sans-serif;
+    }
+    .header__nav-links-desktop .header__nav-link:hover {
+      color: var(--hoverTextColor);
     }
   }
 </style>

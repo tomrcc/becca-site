@@ -3,7 +3,11 @@
     "logo": "/images/logo.png",
     "logo_url": "/",
     "background_color": "transparent",
-    "color": "#ffffff",
+    "text_color": "#ffffff",
+    "hover_text_color": "#f1f1f1",
+    "background_color_mobile": "#B77763",
+    "text_color_mobile": "#ffffff",
+    "hover_text_color_mobile": "#f1f1f1",
     "height": 6,
     "links": [
       {

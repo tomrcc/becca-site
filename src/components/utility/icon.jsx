@@ -57,7 +57,7 @@ import {
   faHand,
   faCross,
   faClose,
-  faPlus
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faLemon, faBookmark } from '@fortawesome/free-regular-svg-icons';
