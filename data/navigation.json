@@ -1,6 +1,6 @@
 {
   "header": {
-    "logo": "/images/logo.png",
+    "logo": "/src/assets/images/logo.png",
     "logo_url": "/",
     "background_color": "transparent",
     "text_color": "#ffffff",
@@ -37,7 +37,7 @@
     ]
   },
   "footer": {
-    "logo": "/images/logo.png",
+    "logo": "/src/assets/images/logo.png",
     "logo_url": "/",
     "copyright": "Hihi Yoga. All rights reserved.",
     "background_color": "#333232",

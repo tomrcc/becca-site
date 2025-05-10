@@ -73,11 +73,10 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   }
   .hero-container {
     max-width: var(--pageContainer);
-    min-height: calc(80vh - var(--headerHeight));
+    min-height: calc(60vh - var(--headerHeight));
     max-height: calc(720px - var(--headerHeight));
     margin-inline: auto;
     padding-inline: var(--pagePadding);
-    padding-block: 40px;
     display: flex;
   }
   .hero-bg-image,
@@ -87,8 +86,9 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
     left: 0;
     top: calc(var(--headerHeight) * -1);
     width: 100%;
-    min-height: calc(80vh + var(--headerHeight));
-    max-height: 720px;
+    min-height: calc(400px + var(--headerHeight));
+    height: calc(60vh + var(--headerHeight));
+    max-height: calc(720px + var(--headerHeight));
     object-fit: cover;
   }
 
@@ -102,9 +102,15 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   .hero-container h1 {
     position: relative;
     z-index: 99;
-    font-size: 1rem;
-    align-self: flex-end;
+    font-size: clamp(1.5rem, 2vw, 2.25rem);
     text-wrap: balance;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 400px;
+    height: calc(60vh - var(--headerHeight));
+    max-height: 720px;
+    padding-block: 40px;
   }
 
   @media screen and (min-width: 512px) {

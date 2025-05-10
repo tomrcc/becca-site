@@ -267,6 +267,10 @@ _inputs:
         icon: query_stats
   logo:
     type: image
+    options:
+      paths:
+        static: ''
+        uploads: src/assets/images
   logo_url:
     comment: Link for the logo in the top left of the footer
   copyright:

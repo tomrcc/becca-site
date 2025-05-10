@@ -1,6 +1,14 @@
 ---
+import { Picture } from "astro:assets";
 import { footer } from "../../../data/navigation.json";
 import Icon from "../utility/icon";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,svg}",
+  { eager: true }
+);
+
+const footerLogo = images[footer.logo]?.default ?? footer.logo;
 ---
 
 <footer
@@ -11,7 +19,17 @@ import Icon from "../utility/icon";
       <a
         class="flex justify-center sm:justify-start items-center"
         href={footer.logo_url}>
-        <img class="footer__logo-image" src={footer.logo} alt="Logo" />
+        <Picture
+          pictureAttributes={{
+            class: "footer__logo-image",
+          }}
+          alt="Hihi Yoga logo"
+          src={footerLogo}
+          loading="eager"
+          widths={[600, 500]}
+          sizes="(max-width: 800px) 100vw, 500px"
+          formats={["avif", "webp"]}
+        />
       </a>
       <ul class="flex gap-4 items-center justify-center">
         {
