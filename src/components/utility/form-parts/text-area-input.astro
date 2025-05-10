@@ -10,18 +10,9 @@ const { name, color, label, width } = Astro.props;
 const span = width === "full" ? "span 2" : "span 1";
 ---
 
-<div class="text-input" style={`grid-column: ${span};`}>
+<div class="form-input-group" style={`grid-column: ${span};`}>
   <label for={name} style={`color: ${color}`}>
     {label}
   </label>
   <textarea rows="10" id={name} name={name}></textarea>
 </div>
-
-<style>
-  .text-input {
-    margin-bottom: 1rem;
-  }
-  textarea {
-    width: 100%;
-  }
-</style>

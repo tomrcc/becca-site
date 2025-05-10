@@ -11,7 +11,7 @@ const { name, label, color, width, values } = Astro.props;
 const span = width === "full" ? "span 2" : "span 1";
 ---
 
-<div class="select-input" style={`grid-column: ${span};`}>
+<div class="form-input-group" style={`grid-column: ${span};`}>
   <label for={name} style={`color: ${color}`}>{label}</label>
   <select name={name} id={name}>
     {
@@ -23,10 +23,63 @@ const span = width === "full" ? "span 2" : "span 1";
 </div>
 
 <style>
-  select {
-    width: 100%;
+  select,
+  select::picker(select) {
+    appearance: base-select;
   }
-  .select-input {
-    margin-bottom: 1rem;
+  select::picker(select) {
+    border: none;
+    transition: all 0.4s allow-discrete;
+    top: calc(anchor(bottom) + 3px);
+  }
+  select::picker(select):popover-open {
+    opacity: 1;
+  }
+
+  @starting-style {
+    select::picker(select):popover-open {
+      opacity: 1;
+    }
+  }
+  select {
+    border: 2px solid #ddd !important;
+    background: #eee;
+    padding: 10px !important;
+    transition: 0.4s;
+  }
+  select::picker-icon {
+    color: #999;
+    transition: 0.4s rotate;
+  }
+  select:open::picker-icon {
+    rotate: 180deg;
+  }
+  option {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+
+    border: 2px solid #ddd;
+    background: #eee;
+    padding: 10px;
+    transition: 0.4s;
+  }
+  option:nth-of-type(odd) {
+    background: #fff;
+  }
+
+  option:hover,
+  option:focus {
+    background: plum;
+  }
+  option .icon {
+    font-size: 1.6rem;
+    text-box: trim-both cap alphabetic;
+  }
+  option:checked {
+    font-weight: bold;
+  }
+  option::checkmark {
+    content: "☑️";
   }
 </style>

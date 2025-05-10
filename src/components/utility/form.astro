@@ -69,7 +69,7 @@ const { form, button } = Astro.props;
     style={`background-color: ${button.background_color};`}
     class="form-button"
     type="submit"
-    value="Send Message"
+    value="Send"
   />
 </form>
 <script
@@ -115,36 +115,51 @@ const { form, button } = Astro.props;
   });
 </script>
 
+<style is:global>
+  #contact-form input,
+  #contact-form select,
+  #contact-form textarea {
+    border: 1px solid black;
+    padding: 0.5rem 1rem;
+    color: black;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+  }
+  #contact-form .form-input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  #contact-form .text-input-group label {
+    line-break: anywhere;
+  }
+</style>
+
 <style>
   #contact-form {
     width: 100%;
     display: block;
+  }
+
+  #contact-form .form-button {
+    padding: 21px 170px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
   }
   @media only screen and (min-width: 768px) {
     #contact-form {
       width: 45%;
     }
   }
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1500px) {
     #contact-form {
+      width: 100%;
       display: grid;
       gap: 1rem;
       grid-template-columns: 1fr 1fr;
     }
-  }
-
-  input,
-  textarea {
-    border: 1px solid #f1f1f1;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    color: black;
-  }
-  .text-input-group label {
-    line-break: anywhere;
-  }
-  .form-button {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
   }
 </style>
