@@ -73,8 +73,8 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   }
   .hero-container {
     max-width: var(--pageContainer);
-    min-height: calc(60vh - var(--headerHeight));
-    max-height: calc(45rem - var(--headerHeight));
+    min-height: calc(60vh - var(--headerHeightMobile));
+    max-height: calc(45rem - var(--headerHeightMobile));
     margin-inline: auto;
     padding-inline: var(--pagePadding);
     display: flex;
@@ -84,11 +84,11 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   .hero-bg-image-filter-grad {
     position: absolute;
     left: 0;
-    top: calc(var(--headerHeight) * -1);
+    top: calc(var(--headerHeightMobile) * -1);
     width: 100%;
-    min-height: calc(25rem + var(--headerHeight));
-    height: calc(60vh + var(--headerHeight));
-    max-height: calc(45rem + var(--headerHeight));
+    min-height: calc(25rem + var(--headerHeightMobile));
+    height: calc(60vh + var(--headerHeightMobile));
+    max-height: calc(45rem + var(--headerHeightMobile));
     object-fit: cover;
   }
 
@@ -108,7 +108,7 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
     flex-direction: column;
     justify-content: flex-end;
     min-height: 25rem;
-    height: calc(60vh - var(--headerHeight));
+    height: calc(60vh - var(--headerHeightMobile));
     max-height: 45rem;
     padding-block: 40px;
   }
@@ -116,6 +116,24 @@ const opacityDecimal = 1 - (1 / (100 / background_filters.background_gradient.gr
   @media screen and (min-width: 512px) {
     .hero-container h1 {
       font-size: 2.5rem;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .hero-container {
+      min-height: calc(60vh - var(--headerHeight));
+      max-height: calc(45rem - var(--headerHeight));
+      padding-inline: var(--pagePadding);
+    }
+    .hero-bg-image,
+    .hero-bg-image-filter,
+    .hero-bg-image-filter-grad {
+      top: calc(var(--headerHeight) * -1);
+      min-height: calc(25rem + var(--headerHeight));
+      height: calc(60vh + var(--headerHeight));
+      max-height: calc(45rem + var(--headerHeight));
+    }
+    .hero-container h1 {
+      height: calc(60vh - var(--headerHeight));
     }
   }
 </style>

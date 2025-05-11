@@ -124,8 +124,9 @@ const { background_color, heading, cards } = Astro.props;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 1rem;
-    padding: 32px 40px;
+    padding: 16px 20px;
   }
   .card-heading h3 {
     width: min-content;
@@ -141,12 +142,12 @@ const { background_color, heading, cards } = Astro.props;
   }
   .card-details-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     margin-bottom: 20px;
   }
   .card-divider {
     height: 2px;
-    width: 200%;
+    width: 100%;
   }
   .card-button {
     display: flex;
@@ -155,6 +156,17 @@ const { background_color, heading, cards } = Astro.props;
     padding: 22px;
   }
 
+  @media screen and (min-width: 720px) {
+    .card-heading {
+      padding: 32px 40px;
+    }
+    .card-details-section {
+      grid-template-columns: 1fr 1fr;
+    }
+    .card-divider {
+      width: 200%;
+    }
+  }
   @media screen and (min-width: 1028px) {
     .card-grid-container {
       padding-block: 200px;

@@ -1,5 +1,5 @@
 ---
-title:
+title: Hihi Yoga
 seo:
   page_description:
   canonical_url:
@@ -23,7 +23,7 @@ content_blocks:
         gradient_enabled: true
         gradient_direction: bottom
         gradient_color: '#000000'
-        gradient_transparency: 70
+        gradient_transparency: 40
         gradient_start: 95
   - _bookshop_name: text-under-image
     background_color: '#F9EEDE'

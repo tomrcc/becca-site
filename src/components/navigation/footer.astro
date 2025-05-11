@@ -9,33 +9,36 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 const footerLogo = images[footer.logo]?.default ?? footer.logo;
+const yearRightNow = new Date().getFullYear();
 ---
 
 <footer
-  style={`background-color: ${footer.background_color}; color: ${footer.color};`}>
-  <div class="px-8">
-    <div
-      class="footer grid grid-cols-1 sm:grid-cols-3 justify-between items-center gap-8 py-[48px]">
-      <a
-        class="flex justify-center sm:justify-start items-center"
-        href={footer.logo_url}>
-        <Picture
-          pictureAttributes={{
-            class: "footer__logo-image",
-          }}
-          alt="Hihi Yoga logo"
-          src={footerLogo}
-          loading="eager"
-          widths={[600, 500]}
-          sizes="(max-width: 800px) 100vw, 500px"
-          formats={["avif", "webp"]}
-        />
-      </a>
-      <ul class="flex gap-4 items-center justify-center">
+  class="footer"
+  style={`background-color: ${footer.background_color}; color: ${footer.text_color};`}>
+  <nav class="footer-container">
+    <a class="footer-logo" href={footer.logo_url}>
+      <Picture
+        pictureAttributes={{
+          class: "footer__logo-image",
+        }}
+        alt="Hihi Yoga logo"
+        src={footerLogo}
+        loading="eager"
+        widths={[600, 500]}
+        sizes="(max-width: 800px) 100vw, 500px"
+        formats={["png", "webp"]}
+      />
+    </a>
+    <p class="footer-copyright">
+      &#169; 2025 {yearRightNow !== 2025 && `- ${yearRightNow} `}
+      {footer.copyright}
+    </p>
+    <div class="footer-socials">
+      <ul class="footer-social-links">
         {
           footer.social.map((link) => {
             return (
-              <li class="w-[2rem]">
+              <li>
                 <a href={link.link}>
                   <Icon icon={link.social_icon} />
                 </a>
@@ -44,34 +47,84 @@ const footerLogo = images[footer.logo]?.default ?? footer.logo;
           })
         }
       </ul>
-
-      <ul class="flex flex-col text-center sm:text-end gap-4">
-        {
-          footer.links.map((link) => {
-            return (
-              <li>
-                <a href={link.link}>{link.text}</a>
-              </li>
-            );
-          })
-        }
-      </ul>
+      <p class="footer-social-link-statement">Stay connected and inspired</p>
     </div>
-
-    <p class="text-center py-8">
-      &#169; {new Date().getFullYear()}
-      {footer.copyright}
-    </p>
-  </div>
+  </nav>
 </footer>
 
 <style>
-  .footer {
+  .footer-container {
     max-width: var(--pageContainer);
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding-inline: var(--pagePadding);
+    padding-block: 2.5rem;
+  }
+  .footer-logo {
+    grid-column: 1;
+    width: 100px;
   }
   .footer__logo-image {
     display: block;
-    max-width: min(200px, 80%);
+    width: 100%;
+  }
+  .footer-socials {
+    grid-row: 2;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: end;
+    gap: 1.5rem;
+  }
+  .footer-social-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: end;
+    gap: 1.5rem;
+  }
+  .footer-social-links li {
+    width: 2rem;
+  }
+  .footer-social-link-statement {
+    display: none;
+  }
+  .footer-copyright {
+    grid-row: 2;
+    align-self: flex-end;
+  }
+  @media (min-width: 640px) {
+    .footer-container {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding-block: 48px;
+    }
+    .footer-logo {
+      grid-column: 2;
+      width: 200px;
+      justify-self: center;
+      align-self: end;
+    }
+    .footer-socials {
+      grid-row: 1;
+      grid-column: 3;
+      align-self: end;
+    }
+    .footer-social-link-statement {
+      display: block;
+      justify-self: end;
+      align-self: flex-end;
+      text-align: end;
+      text-wrap: balance;
+    }
+    .footer-copyright {
+      grid-row: 1;
+    }
   }
 </style>

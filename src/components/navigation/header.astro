@@ -113,13 +113,13 @@ const headerLogo = images[header.logo]?.default ?? header.logo;
     margin-left: var(--pagePadding);
   }
   .header__logo-image img {
-    height: var(--headerLogoHeight);
+    height: var(--headerLogoHeightMobile);
     width: auto;
   }
   .hamburger-icon,
   .close-menu-icon {
     position: relative;
-    width: clamp(1.5rem, 4vw, 2rem);
+    width: clamp(1rem, 2vw, 1.5rem);
   }
   .hamburger-icon {
     margin-right: var(--pagePadding);
@@ -158,7 +158,7 @@ const headerLogo = images[header.logo]?.default ?? header.logo;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: 1rem;
+    padding-block: var(--headerPaddingBlock);
   }
   .header__nav-links-desktop {
     display: none;
@@ -177,10 +177,14 @@ const headerLogo = images[header.logo]?.default ?? header.logo;
   .header__nav-links-mobile .header__nav-link:hover {
     color: var(--hoverTextColorMobile);
   }
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 1000px) {
     .header {
       background-color: var(--backgroundColor);
       color: var(--textColor);
+    }
+    .header__logo-image img {
+      height: var(--headerLogoHeight);
+      width: auto;
     }
     .header__nav-links-mobile,
     .hamburger-icon,
